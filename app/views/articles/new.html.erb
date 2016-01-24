@@ -1,0 +1,21 @@
+<% provide(:title, 'New Article') %>
+<h1>New article</h1>
+
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for @article, :html => { multipart: true } do |f| %>
+      <%= render 'shared/error_messages' %>
+      <%= f.label :title %> <%= f.text_field :title %>
+      <%= f.label :alt_url %> <%= f.text_field :alt_url %>
+      <%= f.label :content %> <%= f.text_area :content %>
+
+
+      <%= f.label :media, :class => 'media-upload' %>
+      <%= file_field_tag "images[]", type: :file, multiple: true %>
+     <%= f.submit "Submit", class: "btn btn-large btn-primary" %>
+    <% end %>
+
+    </div>
+  </div>
+</div>
+
