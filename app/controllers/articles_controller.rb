@@ -1,7 +1,7 @@
 class ArticlesController < ApplicationController
   def new
     @article = Article.new
-    #@medium = Medium.new
+    @medium = Medium.new
   end
 
   def home
@@ -18,14 +18,14 @@ class ArticlesController < ApplicationController
  
   def create
     article_params = params.require(:article).permit(:title, :content, :alt_url)
-    @article = currnet_user.articles.build article_params
+    @article = current_user.articles.build article_params
     if @article.save
       flash[:success] = "Article saved."
-#      if params[:images]
-#        params[:images].each do |image|
-#          @article.media.create image: image
-#        end
-#      end
+      if params[:images]
+        params[:images].each do |image|
+          @article.media.create image: image
+        end
+      end
       redirect_to @article
     else
       flash[:error] = "Article could not be saved."
