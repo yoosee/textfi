@@ -1,6 +1,6 @@
 class Article < ActiveRecord::Base
   belongs_to :user
-  has_many :media, :dependent => :destroy
+#  has_many :media, :dependent => :destroy
   enum status: { draft: 0, published: 1 }
 
   before_save {

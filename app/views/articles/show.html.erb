@@ -7,11 +7,11 @@
   <span class="timestamp">
     Posted <%= time_ago_in_words(@article.created_at) %> ago.
   </span>
-  <% unless @article.media.empty? %>
-    <% @article.media.each do |img| %>
-      <div><%= image_tag img.image.url :medium %></div>
-    <% end %>
-  <% end %>
+  <%# unless @article.media.empty? %>
+    <%# @article.media.each do |img| %>
+      <div><%#= image_tag img.image.url :medium %></div>
+    <%# end %>
+  <%# end %>
   <div><%== @article.alt_url %></div>
 </div>
 

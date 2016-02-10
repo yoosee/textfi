@@ -21,11 +21,11 @@ class ArticlesController < ApplicationController
     @article = current_user.articles.build article_params
     if @article.save
       flash[:success] = "Article saved."
-      if params[:images]
-        params[:images].each do |image|
-          @article.media.create image: image
-        end
-      end
+#      if params[:image]
+#        params[:image].each do |i|
+#          @article.media.create image: i
+#        end
+#      end
       redirect_to @article
     else
       flash[:error] = "Article could not be saved."

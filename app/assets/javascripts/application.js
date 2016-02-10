@@ -15,4 +15,7 @@
 //= require bootstrap
 //= require dropzone.min
 //= require turbolinks
+//= require media
 //= require_tree .
+//
+
