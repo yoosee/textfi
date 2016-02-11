@@ -21,16 +21,16 @@ class ArticlesController < ApplicationController
     @article = current_user.articles.build article_params
     if @article.save
       flash[:success] = "Article saved."
-#      if params[:image]
-#        params[:image].each do |i|
-#          @article.media.create image: i
-#        end
-#      end
       redirect_to @article
     else
       flash[:error] = "Article could not be saved."
       render 'new'
     end
+  end
+
+  def edit
+    @article = Article.find_by_alt_url params[:alt_url]
+    @article = Article.find params[:alt_url] unless @article
   end
 
   def showbyurl

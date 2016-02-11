@@ -16,7 +16,8 @@ $(document).ready(function(){
 						parmalink = $("img.image").attr('src')
 					}
 				});
-				$(file.previewTemplate).append('| <a class="dz-permalink" href="' + parmalink + '">Link</a>');
+				$(file.previewTemplate).append('(' + response.fileID + ')');
+//				$(file.previewTemplate).append('<a class="dz-permalink" href="' + parmalink + '">Link</a>');
 			},
 			
 		removefile: function(file) {

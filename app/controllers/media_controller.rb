@@ -13,7 +13,7 @@ class MediaController < ApplicationController
   end
 
   def index
-    @media = Medium.paginate(page: params[:page], :per_page => 12)
+    @media = Medium.reorder("created_at DESC").paginate(page: params[:page], :per_page => 12)
   end
 
   def show

@@ -1,0 +1,3 @@
+$(function(){ 
+	$("input#article_alt_url").val($.datepicker.formatDate('yy-mm-', new Date()));
+});
