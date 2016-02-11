@@ -8,6 +8,15 @@ $(document).ready(function(){
 			success: function(file, response) {
 				$(file.previewTemplate).find('.dz-remove').attr('id', response.fileID);
 				$(file.previewElement).addClass("dz-success");
+				var parmalink = '';
+				$.ajax({
+					type: 'GET',
+					url: '/media/' + response.fileID,
+					success: function(data) {
+						parmalink = $("img.image").attr('src')
+					}
+				});
+				$(file.previewTemplate).append('| <a class="dz-permalink" href="' + parmalink + '">Link</a>');
 			},
 			
 		removefile: function(file) {

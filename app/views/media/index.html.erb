@@ -1,0 +1,11 @@
+<% provide(:title, 'All Media') %>
+
+<%= will_paginate %>
+<div class="media">
+  <% @media.each do |medium| %>
+    <%= link_to image_tag(medium.image.url :thumb), medium.image.url %> 
+  <% end %>
+</div>
+
+<%= will_paginate %>
+

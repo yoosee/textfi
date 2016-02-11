@@ -13,9 +13,11 @@ class MediaController < ApplicationController
   end
 
   def index
+    @media = Medium.paginate(page: params[:page], :per_page => 12)
   end
 
   def show
+    @medium = Medium.find params[:id]
   end
 
   private
