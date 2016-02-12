@@ -4,7 +4,7 @@ class Article < ActiveRecord::Base
   enum status: { draft: 0, published: 1 }
 
   before_save {
-    self.alt_url = alt_url.gsub(/^\//, '')
+    self.alt_url = alt_url.gsub(/^\//, '-')
   }
 
   default_scope -> { order('created_at DESC') }

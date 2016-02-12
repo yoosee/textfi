@@ -1,0 +1,16 @@
+    <%= form_for @article do |f| %>
+      <%= render 'shared/error_messages' %>
+      <%= f.label :title %> <%= f.text_field :title %>
+      <%= f.label :alt_url %> <%= f.text_field :alt_url %>
+      <%= f.label :content %> <%= f.text_area :content, :size=>'x20' %>
+
+      <%= f.submit "Submit", class: "btn btn-large btn-primary" %>
+    <% end %>
+
+    Upload images
+    <%= form_for @medium, :html => { multipart: true, class: "dropzone" } do |f| %>
+      <div class="fallback">
+        <%= f.file_field :image %>
+        <%= f.submit "Upload" %>
+      </div>
+    <% end %>

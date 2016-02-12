@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 #  match "/articles/:alt_url", to: 'articles#showbyurl', via: get, alt_url: /.+/
 
   get 'articles/new'
+  match '/articles/:id/edit', to: 'articles#edit', via: 'get', id: /\d+/
   match '/articles/:alt_url', to: 'articles#showbyurl', via: 'get', alt_url: /.+/
 
   resources :users

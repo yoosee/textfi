@@ -1,6 +1,9 @@
 <%= provide(:title, @article.title) %>
-<h1>
+<h1 class="article-title">
       <%= @article.title %>
+      <% if signed_in? %>
+        [<%= link_to "Edit", edit_article_path(@article.id) %>]
+      <% end %>
 </h1>
 <div>
   <span class="content"><%== @article.content %></span>

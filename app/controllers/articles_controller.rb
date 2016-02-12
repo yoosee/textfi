@@ -17,7 +17,6 @@ class ArticlesController < ApplicationController
   end
  
   def create
-    article_params = params.require(:article).permit(:title, :content, :alt_url)
     @article = current_user.articles.build article_params
     if @article.save
       flash[:success] = "Article saved."
@@ -29,8 +28,21 @@ class ArticlesController < ApplicationController
   end
 
   def edit
-    @article = Article.find_by_alt_url params[:alt_url]
-    @article = Article.find params[:alt_url] unless @article
+#    @article = Article.find_by_alt_url params[:alt_url]
+    @article = Article.find params[:id] 
+    @medium = Medium.new #######
+    render 'edit'
+  end
+
+  def update
+    @article = Article.find params[:id] 
+    if @article.update_attributes article_params
+      flash[:success] = "Article Updated"
+      redirect_to @article
+    else
+      flash[:error] = "Article could not be updated"
+      render 'edit'
+    end
   end
 
   def showbyurl
@@ -53,4 +65,10 @@ class ArticlesController < ApplicationController
     base_url = 'http://zero.init.org:3000/articles/'
     article.alt_url ? base_url + article.alt_url : base_url + article.id.to_s
   end
+
+  def article_params
+    params.require(:article).permit(:title, :content, :alt_url)
+  end
+
 end
+
