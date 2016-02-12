@@ -3,7 +3,7 @@
 <%= will_paginate %>
 <div class="media">
   <% @media.each do |medium| %>
-    <%= link_to image_tag(medium.image.url :thumb), medium.image.url %> 
+    <%= link_to image_tag(medium.image.url :thumb), medium_path(medium.id) %> 
   <% end %>
 </div>
 

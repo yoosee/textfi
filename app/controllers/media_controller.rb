@@ -20,6 +20,20 @@ class MediaController < ApplicationController
     @medium = Medium.find params[:id]
   end
 
+  def destroy
+    @medium = Medium.find params[:id]
+    begin
+      @medium.image = nil
+      @medium.save
+      @medium.destroy
+    rescue
+      flash[:danger] = "unable to delete medium"
+    else
+      flash[:success] = "medium deleted"
+    end
+  end
+
+
   private
   def medium_params
     params.require(:medium).permit(:image)
