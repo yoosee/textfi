@@ -1,0 +1,20 @@
+
+<div class="article">
+<h1 class="title">
+      <%= @article.title %>
+      <% if signed_in? %>
+        [<%= link_to "Edit", edit_article_path(@article.id) %>]
+      <% end %>
+</h1>
+  <span class="timestamp">
+    Posted <%= time_ago_in_words(@article.created_at) %> ago.
+  </span>
+<div>
+
+  <span class="content"><%== @article.content %></span>
+
+  <div><%= link_to "Link to the article", @article.url %></div>
+
+</div>
+
+</div>
