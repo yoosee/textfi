@@ -8,14 +8,23 @@ class ArticlesController < ApplicationController
   end
 
   def index
-    articles = Article.paginate(page: params[:page], :per_page => 3)
+    articles = Article.published.paginate(page: params[:page], :per_page => 3)
     markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink:true, tables:true)
     @articles = articles.each do |article|
       article.url =  individual_url article
       article.content = markdown.render article.content
     end
   end
- 
+
+  def drafts
+    articles = Article.draft.paginate(page: params[:page], :per_page => 3)
+    markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink:true, tables:true)
+    @articles = articles.each do |article|
+      article.url =  individual_url article
+      article.content = markdown.render article.content
+    end
+  end
+
   def create
     @article = current_user.articles.build article_params
     if @article.save
@@ -67,7 +76,7 @@ class ArticlesController < ApplicationController
   end
 
   def article_params
-    params.require(:article).permit(:title, :content, :alt_url)
+    params.require(:article).permit(:title, :content, :alt_url, :status)
   end
 
 end

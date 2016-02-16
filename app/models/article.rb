@@ -14,5 +14,13 @@ class Article < ActiveRecord::Base
   validates :alt_url, uniqueness: { case_sensitive: false }, length: { maximum: 500 }, allow_blank: true
 
   attr_accessor :url
+
+  def previous
+    Article.where(["id < ?", id]).last
+  end
+
+  def next
+    Article.where(["id > ?", id]).last
+  end
     
 end
