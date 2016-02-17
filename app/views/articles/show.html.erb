@@ -1,3 +1,8 @@
 <%= provide(:title, @article.title) %>
 
-<%= render 'article' %>
+<% if @article.published? || signed_in? %>
+  <%= render 'article' %>
+<% else %>
+  <div> No article in this url. <%= link_to "back to home", root_path %>.</div>
+<% end %>
+
