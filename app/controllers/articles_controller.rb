@@ -1,4 +1,6 @@
 class ArticlesController < ApplicationController
+  before_action :signed_in_user, only: [:new, :create, :edit, :update, :drafts, :destroy]
+
   def new
     @article = Article.new
     @medium = Medium.new
@@ -77,6 +79,10 @@ class ArticlesController < ApplicationController
 
   def article_params
     params.require(:article).permit(:title, :content, :alt_url, :status)
+  end
+
+  def signed_in_user
+    redirect_to signin_url, notice: "please sign in." unless signed_in?
   end
 
 end

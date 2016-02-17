@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :signed_in_user, :only: [:edit, :update]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -51,6 +52,10 @@ class UsersController < ApplicationController
   private
   def set_user
     @user = User.find params[:id]
+  end
+
+  def signed_in_user
+    redirect_to signin_url, notice: "Please sign in." unless signed_in?
   end
 
   def user_params
