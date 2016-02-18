@@ -13,6 +13,7 @@
 
   <span class="content"><%== @article.content %></span>
 
+  <span class "tags"> <%= render 'articles/tag_list', tag_list: @article.tag_list %></span>
   <div><%= link_to "Link to the article", @article.url %></div>
 
 </div>
