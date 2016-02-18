@@ -1,4 +1,7 @@
 class MediaController < ApplicationController
+
+  before_action :signed_in_user, except: [:show]
+
   def new
     @medium = Medium.new
   end
@@ -38,6 +41,10 @@ class MediaController < ApplicationController
   def medium_params
     params.require(:medium).permit(:image)
 #    params.permit(:image)
+  end
+
+  def signed_in_user
+    redirect_to signin_url, notice: "please sign in." unless signed_in?
   end
 
 end
