@@ -7,7 +7,11 @@
       <% end %>
 </h1>
   <span class="timestamp">
-    Posted <%= time_ago_in_words(@article.created_at) %> ago.
+    <% if @article.published? %>
+      Posted <%= time_ago_in_words(@article.published_at) %> ago.
+    <% else %>
+      Updated(draft) <%= time_ago_in_words(@article.updated_at) %> ago.
+    <% end %>
   </span>
 <div>
 

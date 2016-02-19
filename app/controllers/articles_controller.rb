@@ -29,11 +29,17 @@ class ArticlesController < ApplicationController
 
   def create
     @article = current_user.articles.build article_params
+
+    if @article.published? # || params[:status] == :published 
+      @article.published_at = Time.now unless @article.published_at
+    end
+
     if @article.save
       flash[:success] = "Article saved."
       redirect_to @article
     else
       flash[:error] = "Article could not be saved."
+      @medium = Medium.new ### better way to keep @medium object in view??
       render 'new'
     end
   end
@@ -47,7 +53,13 @@ class ArticlesController < ApplicationController
 
   def update
     @article = Article.find params[:id] 
+
     if @article.update_attributes article_params
+
+      if @article.published?
+        @article.update_attribute(:published_at, Time.now) unless @article.published_at
+      end
+
       flash[:success] = "Article Updated"
       redirect_to @article
     else
