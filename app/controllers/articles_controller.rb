@@ -38,7 +38,7 @@ class ArticlesController < ApplicationController
       flash[:success] = "Article saved."
       redirect_to @article
     else
-      flash[:error] = "Article could not be saved."
+      flash[:danger] = "Article could not be saved."
       @medium = Medium.new ### better way to keep @medium object in view??
       render 'new'
     end

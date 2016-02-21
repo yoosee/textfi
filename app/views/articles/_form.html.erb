@@ -1,10 +1,10 @@
     <%= form_for @article do |f| %>
       <%= render 'shared/error_messages' %>
-      <%= f.label :title %> <%= f.text_field :title %>
-      <%= f.label :alt_url %> <%= f.text_field :alt_url %>
-      <%= f.label :content %> <%= f.text_area :content, :size=>'x20' %>
-      <%= f.label :status %> <%= f.select :status, Article.statuses.keys.to_a %>
-      <%= f.label :tag_list, "Tags" %> <%= text_field_tag 'article[tag_list]', @article.tag_list.join(','), "data-role" => "tagsinput" %>
+      <%= f.label :title %> <%= f.text_field :title, class: 'form-control' %>
+      <%= f.label :alt_url %> <%= f.text_field :alt_url, class: 'form-control' %>
+      <%= f.label :content %> <%= f.text_area :content, :size=>'x20', class: 'form-control' %>
+      <%= f.label :status %> <%= f.select :status, Article.statuses.keys.to_a, class: 'form-control' %>
+      <%= f.label :tag_list, "Tags" %> <%= text_field_tag 'article[tag_list]', @article.tag_list.join(','), "data-role" => "tagsinput", class: 'form-control' %>
 
       <%= f.submit "Submit", class: "btn btn-large btn-primary" %>
     <% end %>

@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   match '/articles/:id/edit', to: 'articles#edit', via: 'get', id: /\d+/
   match '/articles/:alt_url', to: 'articles#showbyurl', via: 'get', alt_url: /.+/
 
+  resources :blogs
   resources :users
   resources :articles
   resources :sessions, only: [:new, :create, :destroy]
