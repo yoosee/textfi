@@ -1,5 +1,6 @@
 class ArticlesController < ApplicationController
-  before_action :signed_in_user, only: [:new, :create, :edit, :update, :drafts, :destroy]
+#  before_action :signed_in_user, only: [:new, :create, :edit, :update, :drafts, :destroy]
+  before_action :signed_in_user, except: [:index, :show, :showbyurl]
 
   def new
     @article = Article.new
@@ -107,7 +108,7 @@ class ArticlesController < ApplicationController
   
   def get_blog_id
     # requrl = request.original_url
-    request_blog = Blog.where("baseurl like ?", "%#{request.host}%").first
+    request_blog = Blog.where("baseurl like ?", "%#{request.host}%").first # revisit/fix later if request.host is appropriate identifier for Blog.
     
 #    request_blog = Blog.find_by(:id => 1) ##### temporary for testing
     request_blog ? request_blog.id : 1  # return default ID as fallback. revisit/fix later..

@@ -1,7 +1,6 @@
 class SetupController < ApplicationController
   def new
-#    @user = User.new
-#    @blog = Blog.new
+    @show_setup = show_setup?
   end
 
   def create
@@ -15,6 +14,12 @@ class SetupController < ApplicationController
     else
     end
     render 'new'
+  end
+
+  private
+
+  def show_setup?
+    return true if User.all == nil or User.all.empty?
   end
 
 end

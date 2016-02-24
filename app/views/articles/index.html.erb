@@ -1,18 +1,11 @@
 <% provide(:title, 'All Articles') %>
 
 <%= will_paginate %>
+
 <div class="articles">
   <% @articles.each do |article| %>
-    <div class="article">
-      <h1 class="title"><%= link_to article.title, article.url %></h1>
-      <div class="content">
-        <span class="posted">Posted <%= time_ago_in_words(article.created_at) %> ago.</span>
-        <br />
-        <%== article.content %>
-      </div>
-    </div>
+    <%= render 'article', article: article %>
   <% end %>
-  
 </div>
 
 <%= will_paginate %>

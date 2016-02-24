@@ -1,6 +1,7 @@
 
-
 <h1>Setup Initial User & Blog</h1>
+
+<% if @show_setup %>
 
   <div class="row">
     <div class="span6 offset3">
@@ -21,4 +22,7 @@
      </div>
   </div>
 
+<% else %>
+  Setup already completed. Please <%= link_to :login, signin_path %> to configure.
+<% end %>
 

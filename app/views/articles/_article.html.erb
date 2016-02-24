@@ -1,24 +1,24 @@
 
 <div class="article">
 <h1 class="title">
-      <%= @article.title %>
+      <%= article.title %>
       <% if signed_in? %>
-        [<%= link_to "Edit", edit_article_path(@article.id) %>]
+        [<%= link_to "Edit", edit_article_path(article.id) %>]
       <% end %>
 </h1>
   <span class="timestamp">
-    <% if @article.published? %>
-      Posted <%= time_ago_in_words(@article.published_at) %> ago.
+    <% if article.published? %>
+      Posted <%= time_ago_in_words(article.published_at) %> ago.
     <% else %>
-      Updated(draft) <%= time_ago_in_words(@article.updated_at) %> ago.
+      Updated(draft) <%= time_ago_in_words(article.updated_at) %> ago.
     <% end %>
   </span>
 <div>
 
-  <span class="content"><%== @article.content %></span>
+  <span class="content"><%== article.content %></span>
 
-  <span class "tags"> <%= render 'articles/tag_list', tag_list: @article.tag_list %></span>
-  <div><%= link_to "Link to the article", @article.url %></div>
+  <span class "tags"> <%= render 'articles/tag_list', tag_list: article.tag_list %></span>
+  <div><%= link_to "Link to the article", article.url %></div>
 
 </div>
 
