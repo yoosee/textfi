@@ -4,13 +4,16 @@ class ArticlesController < ApplicationController
   def new
     @article = Article.new
     @medium = Medium.new
+    @blogs = Blog.all
   end
 
   def home
   end
 
   def index
-    articles = Article.published.paginate(page: params[:page], :per_page => 3)
+    blog_id = get_blog_id()
+    # index shows all articles belongs to specific blog_id and status: published regardless users
+    articles = Article.where(blog_id: blog_id).published.paginate(page: params[:page], :per_page => 3)
     markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink:true, tables:true)
     @articles = articles.each do |article|
       article.url =  individual_url article
@@ -19,7 +22,10 @@ class ArticlesController < ApplicationController
   end
 
   def drafts
-    articles = Article.draft.paginate(page: params[:page], :per_page => 3)
+#    blog_id = get_blog_id()
+#    articles = Article.where(blog_id: blog_id).draft.paginate(page: params[:page], :per_page => 3)
+    # Drafts only shows draft articles belongs to current_user
+    articles = current_user.articles.draft.paginate(page: params[:page], :per_page => 3)
     markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink:true, tables:true)
     @articles = articles.each do |article|
       article.url =  individual_url article
@@ -48,6 +54,7 @@ class ArticlesController < ApplicationController
 #    @article = Article.find_by_alt_url params[:alt_url]
     @article = Article.find params[:id] 
     @medium = Medium.new #######
+    @blogs = Blog.all
     render 'edit'
   end
 
@@ -85,16 +92,25 @@ class ArticlesController < ApplicationController
   private
 
   def individual_url article
-    base_url = 'http://zero.init.org:3000/articles/'
+#    base_url = 'http://zero.init.org:3000/articles/'
+    base_url = Blog.find(get_blog_id).baseurl + '/articles/'
     article.alt_url ? base_url + article.alt_url : base_url + article.id.to_s
   end
 
   def article_params
-    params.require(:article).permit(:title, :content, :alt_url, :status, :tag_list)
+    params.require(:article).permit(:title, :content, :alt_url, :status, :tag_list, :blog_id)
   end
 
   def signed_in_user
     redirect_to signin_url, notice: "please sign in." unless signed_in?
+  end
+  
+  def get_blog_id
+    # requrl = request.original_url
+    request_blog = Blog.where("baseurl like ?", "%#{request.host}%").first
+    
+#    request_blog = Blog.find_by(:id => 1) ##### temporary for testing
+    request_blog ? request_blog.id : 1  # return default ID as fallback. revisit/fix later..
   end
 
 end

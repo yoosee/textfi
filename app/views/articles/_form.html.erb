@@ -1,5 +1,6 @@
     <%= form_for @article do |f| %>
       <%= render 'shared/error_messages' %>
+      <%= f.label :blog_id %> <%= f.select :blog_id, options_from_collection_for_select(@blogs, :id, :title) %>
       <%= f.label :title %> <%= f.text_field :title, class: 'form-control' %>
       <%= f.label :alt_url %> <%= f.text_field :alt_url, class: 'form-control' %>
       <%= f.label :content %> <%= f.text_area :content, :size=>'x20', class: 'form-control' %>
