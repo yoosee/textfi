@@ -1,38 +1,22 @@
-<h1>Setup Admin user and Initial Blog</h1>
-
-<%= form_for(@user) do |f| %>
-  <% if @user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
-
-      <ul>
-        <% @user.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+<h1>Setup Initial User & Blog</h1>
 
   <div class="row">
     <div class="span6 offset3">
       <h2>User Setup</h2>
-      <%= form_for(@user) do |f| %>
+      <%= form_tag({controller: "setup", action: "create"}) do %>
         <%= render 'shared/error_messages' %>
-        <%= f.label :name %> <%= f.text_field :name, class: 'form-control' %>
-        <%= f.label :email %> <%= f.text_field :email, class: 'form-control' %>
-        <%= f.label :password %> <%= f.password_field :password, class: 'form-control' %>
-        <%= f.label :password_confirmation, "Confirmation" %> <%= f.password_field :password_confirmation, class: 'form-control' %>
-      <% end %>
+        <%= label :name, "Name" %> <%= text_field :user, :name %>
+        <%= label :email, "Email" %> <%= text_field :user, :email, class: 'form-control' %>
+        <%= label :password, "Password" %> <%= password_field :user, :password, class: 'form-control' %>
+        <%= label :password_confirmation, "Password Confirmation" %> <%= password_field :user, :password_confirmation, class: 'form-control' %>
 
       <h2>Blog Setup</h2>
-      <%= form_for(@blog) do |f| %>
-        <%= f.label :title %> <%= f.text_field :title, class: 'form-control' %>
-        <%= f.label :baseurl %> <%= f.text_field :baseurl, class: 'form-control' %>
+        <%= label :title, "Blog Title" %> <%= text_field :blog, :title, class: 'form-control' %>
+        <%= label :baseurl, "Blog base URL" %> <%= text_field :blog, :baseurl, class: 'form-control' %>
 
-        <%= f.submit "Create Account & Blog", class: "btn btn-large btn-primary" %>
+        <%= submit_tag "Create Account & Blog", class: "btn btn-large btn-primary" %>
       <% end %>
      </div>
   </div>
 
-<% end %>
 
