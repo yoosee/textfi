@@ -1,7 +1,8 @@
 <header class="navbar navbar-fixed-top navbar-inverse">
   <div class="navbar-inner">
     <div class="container">
-      <%= link_to "Title", root_path, id: "logo" %>
+      <%= link_to image_tag("/system/W3er-white.png", alt: "World Wide Walker"), root_path, id: "logo" %>
+      <%= render 'layouts/google' %>
       <nav>
         <ul class="nav navbar-nav pull-right">
           <li><%= link_to "Home",    root_path %></li>
@@ -23,8 +24,7 @@
               </ul>
             </li>
           <% else %>
-            <li><%= link_to "Sign in", signin_path %></li>
-            <li><%= link_to "Sign up", signup_path %></li>
+            <li><%= link_to "Login", signin_path %></li>
           <% end %>
         </ul>
       </nav>

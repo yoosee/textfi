@@ -127,6 +127,23 @@ input {
 	}
 }
 
+/* article formatting */
+.article {
+	h1.title { 
+  	margin-bottom: 5px; 
+		text-size: 180%;
+  }
+	.timestamp {
+	}
+	.content {
+		margin-top: 30px;
+	}
+}
+
+.article-comment {
+}
+
+
 /* miscellaneous */
 
 .debug_dump {

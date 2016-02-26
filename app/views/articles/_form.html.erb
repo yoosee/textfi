@@ -2,7 +2,10 @@
       <%= render 'shared/error_messages' %>
       <%= f.label :blog_id %> <%= f.select :blog_id, options_from_collection_for_select(@blogs, :id, :title) %>
       <%= f.label :title %> <%= f.text_field :title, class: 'form-control' %>
-      <%= f.label :alt_url %> <%= f.text_field :alt_url, class: 'form-control' %>
+      <%= f.label :alt_url %> <div class="input-group">
+        <span class="input-group-addon" id="alt-url-addon">http://<%= request.host%>/articles/</span> 
+        <%= f.text_field :alt_url, { class: 'form-control', 'aria-describedby' => 'alt-url-addon' } %>
+      </div>
       <%= f.label :content %> <%= f.text_area :content, :size=>'x20', class: 'form-control' %>
       <%= f.label :status %> <%= f.select :status, Article.statuses.keys.to_a, class: 'form-control' %>
       <%= f.label :tag_list, "Tags" %> <%= text_field_tag 'article[tag_list]', @article.tag_list.join(','), "data-role" => "tagsinput", class: 'form-control' %>

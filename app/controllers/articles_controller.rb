@@ -13,6 +13,7 @@ class ArticlesController < ApplicationController
 
   def index
     blog_id = get_blog_id()
+    @blog = Blog.find blog_id
     # index shows all articles belongs to specific blog_id and status: published regardless users
     articles = Article.where(blog_id: blog_id).published.paginate(page: params[:page], :per_page => 3)
     markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink:true, tables:true)
@@ -77,6 +78,8 @@ class ArticlesController < ApplicationController
   end
 
   def showbyurl
+    blog_id = get_blog_id()
+    @blog = Blog.find blog_id
     @article = Article.find_by_alt_url params[:alt_url]
     @article = Article.find params[:alt_url] unless @article
     markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, autlink: true, tables: true)
@@ -85,6 +88,8 @@ class ArticlesController < ApplicationController
   end
 
   def show
+    blog_id = get_blog_id()
+    @blog = Blog.find blog_id
     @article = Article.find params[:id]
     markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, autlink: true, tables: true)
     @article.content = markdown.render @article.content
