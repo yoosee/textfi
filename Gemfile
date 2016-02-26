@@ -24,6 +24,7 @@ gem 'redcarpet'
 
 # Pagination
 gem 'will_paginate'
+gem 'bootstrap-will_paginate'
 
 # Image uploader
 gem 'paperclip', "~> 4.3"

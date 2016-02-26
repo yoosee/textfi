@@ -1,7 +1,40 @@
 <%= provide(:title, @article.title) %>
 
+<!-- code snippet for FB Comment JavaScript SDK -->
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5&appId=1721451128113160";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<!-- end -->
+
+<!-- Go to www.addthis.com/dashboard to customize your tools -->
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4e43073c7b0762d0"></script>
+
+<div class="page-header">
+  <h1><%= image_tag("/system/W3er-title.png", alt: "World Wide Walker") %></h1>
+</div>
+
 <% if @article.published? || signed_in? %>
   <%= render 'article', article: @article %>
+
+  <!-- Go to www.addthis.com/dashboard to customize your tools -->
+  <div class="addthis_sharing_toolbox"></div>
+
+  <!-- Pager -->
+  <ul class="pager">
+    <li class="previous"><%= link_to ("&larr; Older").html_safe, @article.previous %></li>
+    <li class="next"><%= link_to ("Newer &rarr;").html_safe, @article.next %></li>
+  </ul>
+
+  <div class="article-comment">
+    <!-- FB Comment -->
+    <div class="fb-comments" data-href="<%= @article.url %>" data-width="600" data-numposts="3"></div>
+  </div>
+
 <% else %>
   <div> No article in this url. <%= link_to "back to home", root_path %>.</div>
 <% end %>

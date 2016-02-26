@@ -1,4 +1,9 @@
-<% provide(:title, 'All Articles') %>
+<% provide(:title, @blog.title ) %>
+
+<div class="page-header">
+  <h1><%= image_tag("/system/W3er-title.png", alt: @blog.title) %><br>
+  <small>a blog on first go without spending ages practicing.</small></h1>
+</div>
 
 <%= will_paginate %>
 
