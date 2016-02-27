@@ -6,7 +6,7 @@ class TextfiMarkdown < Redcarpet::Render::HTML
   def image link, title, alt_text
     img = nil
     if /id:(\d+)/ =~ link
-      media = Media.find($1)
+      media = Medium.find($1)
       img = "<img src='#{media.image.url :medium}' alt='#{alt_text}' title='#{title}'>"
     else
       img = "<img src='#{link}' alt='#{alt_text}' title='#{title}'>"

@@ -16,22 +16,18 @@ class ArticlesController < ApplicationController
     @blog = Blog.find blog_id
     # index shows all articles belongs to specific blog_id and status: published regardless users
     articles = Article.where(blog_id: blog_id).published.paginate(page: params[:page], :per_page => 3)
-    markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink:true, tables:true)
     @articles = articles.each do |article|
       article.url =  individual_url article
-      article.content = markdown.render article.content
+      article.content = markdown article.content
     end
   end
 
   def drafts
-#    blog_id = get_blog_id()
-#    articles = Article.where(blog_id: blog_id).draft.paginate(page: params[:page], :per_page => 3)
-    # Drafts only shows draft articles belongs to current_user
+    # Drafts shows draft articles belongs to current_user
     articles = current_user.articles.draft.paginate(page: params[:page], :per_page => 3)
-    markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink:true, tables:true)
     @articles = articles.each do |article|
       article.url =  individual_url article
-      article.content = markdown.render article.content
+      article.content = markdown article.content
     end
   end
 
@@ -82,8 +78,7 @@ class ArticlesController < ApplicationController
     @blog = Blog.find blog_id
     @article = Article.find_by_alt_url params[:alt_url]
     @article = Article.find params[:alt_url] unless @article
-    markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, autlink: true, tables: true)
-    @article.content = markdown.render @article.content
+    @article.content = markdown @article.content
     render 'show'
   end
 
@@ -91,8 +86,7 @@ class ArticlesController < ApplicationController
     blog_id = get_blog_id()
     @blog = Blog.find blog_id
     @article = Article.find params[:id]
-    markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, autlink: true, tables: true)
-    @article.content = markdown.render @article.content
+    @article.content = markdown @article.content
   end
 
   private
@@ -117,6 +111,19 @@ class ArticlesController < ApplicationController
     
 #    request_blog = Blog.find_by(:id => 1) ##### temporary for testing
     request_blog ? request_blog.id : 1  # return default ID as fallback. revisit/fix later..
+  end
+
+  def markdown text
+    options = {
+      fenced_code_blocks: true,
+      hard_wrap: true
+    }
+    extensions = {
+      autolink: true,
+      superscript: true
+    }
+    markdown = Redcarpet::Markdown.new(TextfiMarkdown.new(options), extensions)
+    markdown.render(text).html_safe
   end
 
 end
