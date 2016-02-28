@@ -6,14 +6,19 @@
         <span class="input-group-addon" id="alt-url-addon">http://<%= request.host%>/articles/</span> 
         <%= f.text_field :alt_url, { class: 'form-control', 'aria-describedby' => 'alt-url-addon' } %>
       </div>
-      <%= f.label :content %> <%= f.text_area :content, :size=>'x20', class: 'form-control' %>
+      <%= f.label :content %> 
+      <%= f.text_area :content, :size=>'x20', class: 'form-control' %>
       <%= f.label :status %> <%= f.select :status, Article.statuses.keys.to_a, class: 'form-control' %>
       <%= f.label :tag_list, "Tags" %> <%= text_field_tag 'article[tag_list]', @article.tag_list.join(','), "data-role" => "tagsinput", class: 'form-control' %>
-
+      <br />
       <%= f.submit "Submit", class: "btn btn-large btn-primary" %>
     <% end %>
 
-    Upload images
+    <br/>
+    <label>Upload images</label>
+    <button type="button" class="btn btn-default" data-container="body" data-toggle="popover" data-placement="top" title="markdown usage" data-content="you can use uploaded images calling by id like ![alt-text](id:10). it'll be replaced by actual image URL.">
+      <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+    </button> 
     <%= form_for @medium, :html => { multipart: true, class: "dropzone" } do |f| %>
       <div class="fallback">
         <%= f.file_field :image %>

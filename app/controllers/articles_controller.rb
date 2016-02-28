@@ -114,15 +114,21 @@ class ArticlesController < ApplicationController
   end
 
   def markdown text
-    options = {
-      fenced_code_blocks: true,
-      hard_wrap: true
+    render_options = {
+      hard_wrap: true,
+      filter_html: false,
+      with_toc_data: true,
+      prettify: true
     }
     extensions = {
+      no_intra_emphasis: true,
       autolink: true,
-      superscript: true
+      superscript: true,
+      fenced_code_blocks: true,
+      disable_indented_code_blocks: true,
+      footnotes: true
     }
-    markdown = Redcarpet::Markdown.new(TextfiMarkdown.new(options), extensions)
+    markdown = Redcarpet::Markdown.new(TextfiMarkdown.new(render_options), extensions)
     markdown.render(text).html_safe
   end
 

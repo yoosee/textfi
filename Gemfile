@@ -21,6 +21,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Markdown renderer
 gem 'redcarpet'
+#gem 'coderay'
 gem 'albino'
 
 # Pagination
