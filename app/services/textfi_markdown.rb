@@ -18,9 +18,9 @@ class TextfiMarkdown < Redcarpet::Render::HTML
     title = alt_text if !title or title.empty?
     if /id:(\d+)/ =~ link 
       media = Medium.find($1)
-      img = "<img src='#{media.image.url :medium}' alt='#{alt_text}' title='#{title}'>"
+      img = "<img src='#{media.image.url :medium}' alt='#{alt_text}' title='#{title}' class='img-responsive'>"
     else
-      img = "<img src='#{link}' alt='#{alt_text}' title='#{title}'>"
+      img = "<img src='#{link}' alt='#{alt_text}' title='#{title}' class='img-responsive'>"
     end
     img
   end
