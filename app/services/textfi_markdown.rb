@@ -22,6 +22,7 @@ class TextfiMarkdown < Redcarpet::Render::HTML
     else
       img = "<img src='#{link}' alt='#{alt_text}' title='#{title}' class='img-responsive'>"
     end
+#    if /asin:(\S+)/ =~ link
     img
   end
 

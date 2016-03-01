@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   resources :sessions, only: [:new, :create, :destroy]
   resources :media
 
+  match '/rss',     to: 'articles#rss', via: 'get'
+
   match '/signup',  to: 'users#new',    via: 'get'
   match '/signin',  to: 'sessions#new', via: 'get'
   match '/signout', to: 'sessions#destroy', via: 'delete'

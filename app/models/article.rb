@@ -15,7 +15,7 @@ class Article < ActiveRecord::Base
 
   acts_as_taggable_on :tags
 
-  attr_accessor :url
+  attr_accessor :url, :summary_image, :summary_content
 
   def previous
     Article.where(["id < ?", id]).last

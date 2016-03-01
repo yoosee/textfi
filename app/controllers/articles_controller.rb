@@ -21,6 +21,19 @@ class ArticlesController < ApplicationController
       article.content = markdown article.content
     end
   end
+  
+  def rss
+    blog_id = get_blog_id()
+    @blog = Blog.find blog_id
+    # rss shows first 10 articles belongs to specific blog_id and status: published regardless users
+    articles = Article.where(blog_id: blog_id).published.first(10)
+    @articles = articles.each do |article|
+      article.url =  individual_url article
+      article.content = markdown article.content
+    end
+    @author = User.find(1)
+    render 'rss.xml.erb'
+  end
 
   def drafts
     # Drafts shows draft articles belongs to current_user
@@ -79,6 +92,8 @@ class ArticlesController < ApplicationController
     @article = Article.find_by_alt_url params[:alt_url]
     @article = Article.find params[:alt_url] unless @article
     @article.content = markdown @article.content
+    @article.summary_image = make_summary_image @article.content, @blog.baseurl
+    @article.summary_content = make_summary_content @article.content
     render 'show'
   end
 
@@ -87,9 +102,10 @@ class ArticlesController < ApplicationController
     @blog = Blog.find blog_id
     @article = Article.find params[:id]
     @article.content = markdown @article.content
+    make_summary @article.content
   end
 
-  private
+#  private
 
   def individual_url article
 #    base_url = 'http://zero.init.org:3000/articles/'
@@ -111,6 +127,21 @@ class ArticlesController < ApplicationController
     
 #    request_blog = Blog.find_by(:id => 1) ##### temporary for testing
     request_blog ? request_blog.id : 1  # return default ID as fallback. revisit/fix later..
+  end
+
+  def make_summary_image html, base_url
+    doc = Nokogiri::HTML.parse html
+    summary_image = doc.css('img').first.attribute('src')
+    summary_image = '' unless summary_image
+    unless /^http/ =~ summary_image
+      summary_image = "#{base_url}/#{summary_image}"
+    end
+    summary_image
+  end
+
+  def make_summary_content html
+    doc = Nokogiri::HTML.parse html
+    doc.css('p').first.inner_text
   end
 
   def markdown text

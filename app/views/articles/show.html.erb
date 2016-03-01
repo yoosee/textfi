@@ -15,11 +15,13 @@
 <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4e43073c7b0762d0"></script>
 
 <div class="page-header">
-  <h1><%= image_tag("/system/W3er-title.png", alt: "World Wide Walker", class: "img-responsive") %></h1>
+  <h1 id="blog-title"><%= image_tag("/system/W3er-title.png", alt: "World Wide Walker", class: "img-responsive") %></h1>
 </div>
 
 <% if @article.published? || signed_in? %>
   <%= render 'article', article: @article %>
+
+  <%= render 'article_summary', article: @article %>
 
   <!-- Go to www.addthis.com/dashboard to customize your tools -->
   <div class="addthis_sharing_toolbox"></div>

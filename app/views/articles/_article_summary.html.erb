@@ -3,19 +3,19 @@
 
 <meta property="og:type" content="article" />
 <meta property="og:site_name" content="<%= @blog.title %>" />
-<meta property="og:title" content="<%= @article.title %>" />
-<meta property="og:url" content="<%= @article.url %>" />
-<meta property="og:image" content="<%= @article.summary.image %>" />
-<meta property="og:description" content="<%= @article.summary.content %>" />
+<meta property="og:title" content="<%= article.title %>" />
+<meta property="og:url" content="<%= @blog.baseurl + '/' + article.alt_url %>" />
+<meta property="og:image" content="<%= article.summary_image %>" />
+<meta property="og:description" content="<%= article.summary_content %>" />
 
 <!-- TwitterCard -->
 <meta name="twitter:site" content="@yoosee" />
 <meta name="twitter:creator" content="@yoosee" />
-<meta name="twitter:description" content="" />
-<meta name="twitter:card" content="photo" />
 <meta name="twitter:title" content="<%= @article.title %>" />
-<meta name="twitter:url" content="<%= @article.url %>" />
-<meta name="twitter:image" content="" />
+<meta name="twitter:url" content="<%= @blog.baseurl + '/' + article.alt_url %>" />
+<meta name="twitter:description" content="<%= @article.summary_content %>" />
+<meta name="twitter:card" content="photo" />
+<meta name="twitter:image" content="<%= @article.summary_image %>" />
 <meta name="twitter:image:width" content="" />
 <meta name="twitter:image:height" content="" />
 

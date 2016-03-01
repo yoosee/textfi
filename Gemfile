@@ -23,6 +23,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'redcarpet'
 #gem 'coderay'
 gem 'albino'
+gem 'nokogiri'
 
 # Pagination
 gem 'will_paginate'

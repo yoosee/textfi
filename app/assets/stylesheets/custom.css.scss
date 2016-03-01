@@ -1,6 +1,21 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+/* media default width */
+// using narrower width as it's using single column layout
+
+@media (min-width: 1200px) {
+	.container {
+		width: 900px;
+	}
+}
+
+@media (min-width: 992px) {
+	.container {
+		width: 880px;
+	}
+}
+
 /* mixins, valiables, etc. */
 
 $grayMediumLight: #eaeaea;
@@ -11,7 +26,6 @@ $grayLighter: #eeeeee;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 }
-
 
 /* universal */
 
@@ -127,6 +141,16 @@ input {
 }
 
 /* article formatting */
+
+h1#blog-title  {
+	margin: 0; 
+	line-height: 5px;
+	img.img-responsive { 
+		margin-left: auto; 
+		margin-right: auto;
+	}
+}
+
 .article {
 	h1.title { 
 		font-size: 3em;
@@ -151,11 +175,11 @@ input {
 
 #gsc {
 	width: 30%;
-	minimum-width: 330px;
+	min-width: 330px;
 	margin: 10px 30px 0 30px;
 	position: relative;
 	display: inline-block;
-	line-height: 0;
+	line-height: 1px;
 }
 
 #gsc .gsc-control-cse * {
