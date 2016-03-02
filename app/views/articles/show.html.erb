@@ -23,13 +23,23 @@
 
   <%= render 'article_summary', article: @article %>
 
+  <%= render 'layouts/googleadsense' %>
+
   <!-- Go to www.addthis.com/dashboard to customize your tools -->
   <div class="addthis_sharing_toolbox"></div>
 
   <!-- Pager -->
   <ul class="pager">
-    <li class="previous"><%= link_to ("&larr; Older").html_safe, @article.previous %></li>
-    <li class="next"><%= link_to ("Newer &rarr;").html_safe, @article.next %></li>
+    <% if @article.previous %> 
+      <li class="previous"><%= link_to ("&larr; Older").html_safe, @article.previous.url %></li>
+    <% else %>
+      <li class="previous disabled"><%= link_to ("&larr; Older").html_safe, '#' %></li>
+    <% end %>
+    <% if @article.next %> 
+      <li class="next"><%= link_to ("Newer &rarr;").html_safe, @article.next.url %></li>
+    <% else %>
+      <li class="next disabled"><%= link_to ("Newer &rarr;").html_safe, '#' %></li>
+    <% end %>
   </ul>
 
   <div class="article-comment">

@@ -1,6 +1,6 @@
 class ArticlesController < ApplicationController
 #  before_action :signed_in_user, only: [:new, :create, :edit, :update, :drafts, :destroy]
-  before_action :signed_in_user, except: [:index, :show, :showbyurl]
+  before_action :signed_in_user, except: [:index, :rss, :show, :showbyurl]
 
   def new
     @article = Article.new
@@ -17,7 +17,6 @@ class ArticlesController < ApplicationController
     # index shows all articles belongs to specific blog_id and status: published regardless users
     articles = Article.where(blog_id: blog_id).published.paginate(page: params[:page], :per_page => 3)
     @articles = articles.each do |article|
-      article.url =  individual_url article
       article.content = markdown article.content
     end
   end
@@ -28,7 +27,6 @@ class ArticlesController < ApplicationController
     # rss shows first 10 articles belongs to specific blog_id and status: published regardless users
     articles = Article.where(blog_id: blog_id).published.first(10)
     @articles = articles.each do |article|
-      article.url =  individual_url article
       article.content = markdown article.content
     end
     @author = User.find(1)
@@ -39,7 +37,6 @@ class ArticlesController < ApplicationController
     # Drafts shows draft articles belongs to current_user
     articles = current_user.articles.draft.paginate(page: params[:page], :per_page => 3)
     @articles = articles.each do |article|
-      article.url =  individual_url article
       article.content = markdown article.content
     end
   end
@@ -107,12 +104,6 @@ class ArticlesController < ApplicationController
 
 #  private
 
-  def individual_url article
-#    base_url = 'http://zero.init.org:3000/articles/'
-    base_url = Blog.find(get_blog_id).baseurl + '/articles/'
-    article.alt_url ? base_url + article.alt_url : base_url + article.id.to_s
-  end
-
   def article_params
     params.require(:article).permit(:title, :content, :alt_url, :status, :tag_list, :blog_id)
   end
@@ -131,7 +122,11 @@ class ArticlesController < ApplicationController
 
   def make_summary_image html, base_url
     doc = Nokogiri::HTML.parse html
-    summary_image = doc.css('img').first.attribute('src')
+    begin 
+      summary_image = doc.css('img').first.attribute('src')
+    rescue
+      summary_image = nil
+    end
     summary_image = '' unless summary_image
     unless /^http/ =~ summary_image
       summary_image = "#{base_url}/#{summary_image}"
@@ -141,7 +136,11 @@ class ArticlesController < ApplicationController
 
   def make_summary_content html
     doc = Nokogiri::HTML.parse html
-    doc.css('p').first.inner_text
+    begin 
+      doc.css('p').first.inner_text
+    rescue
+      ''
+    end
   end
 
   def markdown text

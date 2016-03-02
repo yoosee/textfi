@@ -162,6 +162,9 @@ h1#blog-title  {
 	.content {
 		margin-top: 30px;
 	}
+	.edit-link {
+		color: orange;
+	}
 }
 
 .article-comment {
@@ -185,18 +188,6 @@ h1#blog-title  {
 #gsc .gsc-control-cse * {
 	box-sizing: content-box;
 }
-
-/*
-.navbar-right {
-	width: 200px;
-}
-
-@media (max-width: 1000px) {
-	.navbar-right {
-		width: auto;
-	}
-}
-*/
 
 #gsc td {
 	border: none;

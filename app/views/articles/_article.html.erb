@@ -4,7 +4,7 @@
     <%= link_to article.title, article.url %>
     <% if signed_in? %>
       
-      <%= link_to ("<span class='glyphicon glyphicon-edit'>").html_safe, edit_article_path(article.id), title: "Edit" %>
+      <%= link_to ("<span class='glyphicon glyphicon-edit'>").html_safe, edit_article_path(article.id), title: "Edit", class: "edit-link" %>
     <% end %>
   </h1>
   <span class="timestamp">

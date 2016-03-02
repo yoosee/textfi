@@ -15,14 +15,19 @@ class Article < ActiveRecord::Base
 
   acts_as_taggable_on :tags
 
-  attr_accessor :url, :summary_image, :summary_content
+  attr_accessor :summary_image, :summary_content
 
   def previous
-    Article.where(["id < ?", id]).last
+    Article.unscoped.where(["id < ?", self.id]).published.order("published_at DESC").first
   end
 
   def next
-    Article.where(["id > ?", id]).last
+    Article.unscoped.where(["id > ?", self.id]).published.order("published_at ASC").first
   end
-    
+
+  def url
+    base_url = Blog.find(self.blog_id).baseurl + '/articles/'
+    self.alt_url ? base_url + self.alt_url : base_url + self.id.to_s
+  end
+
 end
