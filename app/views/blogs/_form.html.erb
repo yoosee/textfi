@@ -1,0 +1,9 @@
+    <%= form_for @blog do |f| %>
+      <%= render 'shared/error_messages' %>
+      <%= f.label :title %> <%= f.text_field :title, class: 'form-control' %>
+      <%= f.label :baseurl %> <%= f.text_field :baseurl, class: 'form-control' %>
+      <%= f.label :summary %> 
+      <%= f.text_area :summary, :size=>'x20', class: 'form-control' %>
+      <%= f.submit "Submit", class: "btn btn-large btn-primary" %>
+    <% end %>
+
