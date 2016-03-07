@@ -102,6 +102,13 @@ class ArticlesController < ApplicationController
     make_summary @article.content
   end
 
+  def tagged
+    blog_id = get_blog_id()
+    @blog = Blog.find blog_id
+    @articcles = Article.tagged_with(params[:tags]).published.paginate(page: params[:page], :per_page => 10)
+    render 'tagged'
+  end
+
 #  private
 
   def article_params

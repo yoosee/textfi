@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   resources :sessions, only: [:new, :create, :destroy]
   resources :media
 
-  match '/tags/:tag', to: 'articles#tag', via: 'get', tag: /.*/
+  match '/tags/:tags', to: 'articles#tagged', via: 'get', tag: /.+/
 
   match '/rss',     to: 'articles#rss', via: 'get'
 
