@@ -105,7 +105,12 @@ class ArticlesController < ApplicationController
   def tagged
     blog_id = get_blog_id()
     @blog = Blog.find blog_id
-    @articcles = Article.tagged_with(params[:tags]).published.paginate(page: params[:page], :per_page => 10)
+    @articles = Article.tagged_with(params[:tags]).published.paginate(page: params[:page], :per_page => 10)
+    if @articles.empty?
+      flash[:warning] = "Articles Tagged \"#{params[:tags]}\" Not found."
+    else
+      flash[:success] = "Articles Tagged \"#{params[:tags]}\" found."
+    end
     render 'tagged'
   end
 
