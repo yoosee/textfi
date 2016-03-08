@@ -6,13 +6,14 @@ class SetupController < ApplicationController
   def create
     @user = User.new params.require(:user).permit(:name, :email, :password, :password_confirmation)
     @blog = Blog.new params.require(:blog).permit(:title, :baseurl)
-    if @user.save
+    User.transaction do 
+      @user.save!
+      @blog.save!
       flash[:success] = "User successfully created."
-    else
+      redirect_to 'new'
     end
-    if @blog.save
-    else
-    end
+  rescue
+    @blog.valid?
     render 'new'
   end
 
