@@ -22,4 +22,11 @@ test:
 
 production:
   <<: *default
-  database: db/production.sqlite3
+#  database: db/production.sqlite3
+  adapter: postgresql
+  encoding: unicode
+  database: textfi
+  pool: 5
+  username: <%= ENV['RAILS_PGSQL_USER'] || 'textfi' %>
+  password: <%= ENV['RAILS_PGSQL_PASSWORD'] %>
+#  database: db/production.sqlite3
