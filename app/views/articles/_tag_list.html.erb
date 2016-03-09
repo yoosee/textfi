@@ -1,3 +1,7 @@
+<span class='glyphicon glyphicon-tags' title="tags"> </span> &nbsp; 
 <% tag_list.each do |tag| %>
-  <span class="label label-primary"><%= tag %></span>
+  <!--
+  <span class="label label-info"><%= link_to tag, "#{@blog.baseurl}/tags/#{tag}" %></span>
+  -->
+  <span class="label label-info"><%= tag %></span>
 <% end %>

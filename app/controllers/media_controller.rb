@@ -1,5 +1,4 @@
 class MediaController < ApplicationController
-
   before_action :signed_in_user, except: [:show]
 
   def new
@@ -8,6 +7,7 @@ class MediaController < ApplicationController
 
   def create
     @medium = Medium.create medium_params
+
     if @medium.save
       render json: { message: "success", fileID: @medium.id }, :status => 200
     else
@@ -40,7 +40,6 @@ class MediaController < ApplicationController
   private
   def medium_params
     params.require(:medium).permit(:image)
-#    params.permit(:image)
   end
 
   def signed_in_user

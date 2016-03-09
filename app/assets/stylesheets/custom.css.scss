@@ -151,6 +151,16 @@ h1#blog-title  {
 	}
 }
 
+.pagination {
+	margin: 3px 0;
+}
+
+.articles {
+	.article-divider {
+		margin-bottom: 4em;
+	}
+}
+
 .article {
 	h1.title { 
 		font-size: 3em;
@@ -164,6 +174,15 @@ h1#blog-title  {
 	}
 	.edit-link {
 		color: orange;
+	}
+	.glyphicon-tags {
+		color: grey;
+	}
+	.tags {
+		margin: 10px 5px;
+		.label { 
+			font-size: larger; 
+		}
 	}
 }
 

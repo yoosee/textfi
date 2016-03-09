@@ -10,6 +10,7 @@
 <div class="articles">
   <% @articles.each do |article| %>
     <%= render 'article', article: article %>
+    <div class="article-divider"></div>
   <% end %>
 </div>
 
