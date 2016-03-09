@@ -26,8 +26,8 @@
               <li><%= link_to "Drafts", articles_drafts_path %></li>
               <li><%= link_to "Media", media_path %></li>
               <li class="divider"></li>
-              <li><%= link_to "Profile", current_user %></li>
               <li><%= link_to "Settings", edit_user_path(current_user) %></li>
+              <li><%= link_to "Blogs", blogs_path %></li>
               <li><%= link_to "Users", users_path %></li>
               <li class="divider"></li>
               <li> <%= link_to "Sign out", signout_path, method: "delete" %> </li>

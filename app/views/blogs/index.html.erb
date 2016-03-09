@@ -1,0 +1,16 @@
+<% provide(:title, "Blog list" ) %>
+
+<h1>Blog List</h1>
+
+<p>Current Blogs</p>
+<div class="articles">
+  <ul>
+  <% @blogs.each do |blog| %>
+    <li> <%= link_to blog.title, blog.baseurl %>
+        (<%= link_to "edit", edit_blog_path(blog.id) %>) </li>
+  <% end %>
+  </ul>
+  <br/> <br/>
+  <p> or <%= link_to "Create New Blog", new_blog_path, class: "btn btn-primary" %> </p>
+</div>
+
