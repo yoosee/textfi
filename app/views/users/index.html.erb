@@ -1,11 +1,23 @@
+<% provide(:title, "User list") %>
+
 <h1>User list</h1>
-<ul>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-3"><label>Name</label></div>
+    <div class="col-md-3"><label>Email</label></div>
+    <div class="col-md-6">&nbsp;</div>
+  </div>
 <% @users.each do |user| %>
-  <li><%= user.name %>, <%= user.email %>
-     [<%= link_to 'Show', user %> | 
-      <%= link_to 'Edit', edit_user_path(user) %>  
-      <%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %>  
-  </li>
+  <div class="row">
+    <div class="col-md-3"><%= user.name %></div>
+    <div class="col-md-3"><%= user.email %></div>
+    <div class="col-md-6">
+      <%= link_to 'Show', user, class: "btn btn-info"%> 
+      <%= link_to 'Edit', edit_user_path(user), class: "btn btn-primary" %> 
+      <%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+    </div>
+  </div>
 <% end %>
-</ul>
+</div>
 
