@@ -34,6 +34,7 @@ class ArticlesController < ApplicationController
   end
 
   def drafts
+    @blog = Blog.find get_blog_id()
     # Drafts shows draft articles belongs to current_user
     articles = current_user.articles.unscoped.draft.order("updated_at DESC").paginate(page: params[:page], :per_page => 10)
     @articles = articles.each do |article|
@@ -83,6 +84,19 @@ class ArticlesController < ApplicationController
     end
   end
 
+  def destroy
+    @article = Article.find params[:id]
+    id = @article.id
+    title = @article.title
+    if @article.destroy
+      flash[:success] = "Article ID:#{id} \"#{title}\" Deleted"
+      redirect_to articles_drafts_path
+    else
+      flash[:danger] = "Article ID:#{id} \"#{title}\" Deleted"
+      redirect_to articles_drafts_path
+    end
+  end
+
   def showbyurl
     blog_id = get_blog_id()
     @blog = Blog.find blog_id
@@ -95,8 +109,7 @@ class ArticlesController < ApplicationController
   end
 
   def show
-    blog_id = get_blog_id()
-    @blog = Blog.find blog_id
+    @blog = Blog.find get_blog_id()
     @article = Article.find params[:id]
     @article.content = markdown @article.content
     make_summary @article.content

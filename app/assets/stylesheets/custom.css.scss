@@ -175,6 +175,14 @@ h1#blog-title  {
 			font-size: 1.1em;
 			line-height: 1.4em;
 		}
+		img.img-responsive {
+			display: inline-block;
+			float: left;
+			margin: 0 1em 0.5em 0;
+		}
+		p {
+			clear: both;
+		}
 	}
 	.edit-link {
 		color: orange;
@@ -190,6 +198,16 @@ h1#blog-title  {
 		.label { 
 			font-size: larger; 
 		}
+	}
+}
+
+.drafts {
+	h1.title {
+		margin: 0;
+		font-size: 2em;
+	}
+	div.article {
+		margin-bottom: 8px;
 	}
 }
 
