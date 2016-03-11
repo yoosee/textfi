@@ -165,6 +165,7 @@ class ArticlesController < ApplicationController
     extensions = {
       no_intra_emphasis: true,
       autolink: true,
+      tables: true,
       superscript: true,
       fenced_code_blocks: true,
       disable_indented_code_blocks: true,
