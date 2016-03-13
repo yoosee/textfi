@@ -4,6 +4,7 @@
 <div class="media">
   <% @media.each do |medium| %>
     <%= link_to image_tag((medium.image.url:thumb), class: "img-rounded"), medium_path(medium.id) %> 
+    <span class="mediumid">(id:<%= medium.id %>)</span>
   <% end %>
 </div>
 
