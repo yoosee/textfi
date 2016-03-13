@@ -16,6 +16,7 @@
 //= require bootstrap
 //= require dropzone.min
 //= require bootstrap-tagsinput.min
+//= require jquery.turbolinks
 //= require turbolinks
 //= require media
 //= require_tree .

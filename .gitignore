@@ -18,8 +18,10 @@
 
 /public/system/media/*
 
+# original dir for bundle install
 /vendor/bundle
 
-Gemfile.lock # temporary
+# temporary
+Gemfile.lock 
 
 /.byebug_history
