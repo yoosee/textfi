@@ -106,6 +106,7 @@ class ArticlesController < ApplicationController
     @article.summary_image = make_summary_image @article.content, @blog.baseurl
     @article.summary_content = make_summary_content @article.content
     render 'show'
+#    render layout: 'application_articles_individual', action: 'show'
   end
 
   def show
@@ -153,7 +154,7 @@ class ArticlesController < ApplicationController
       summary_image = nil
     end
     summary_image = '' unless summary_image
-    unless /^http/ =~ summary_image
+    if summary_image && !summary_image.empty? && /^http/ !~ summary_image
       summary_image = "#{base_url}/#{summary_image}"
     end
     summary_image

@@ -6,6 +6,9 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
   <%= render 'layouts/shim' %>
+  <%# load controller/action specific partial if exists %>
+  <%= render :partial => "#{controller.controller_name}/head_#{action_name}" rescue nil %>
+  <%# load RSS %>
   <link rel="alternate" type="application/rss+xml" title="RSS" href="/rss">
 </head>
 <body>

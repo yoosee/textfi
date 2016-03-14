@@ -20,7 +20,6 @@
 <% if @article.published? || signed_in? %>
   <%= provide(:title, "#{@article.title} - #{@blog.title}") %>
   <%= render 'article', article: @article %>
-  <%= render 'article_summary', article: @article %>
   <%= render 'layouts/googleadsense' %>
   <!-- Go to www.addthis.com/dashboard to customize your tools -->
   <div class="addthis_sharing_toolbox"></div>
