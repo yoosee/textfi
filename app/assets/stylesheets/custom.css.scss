@@ -306,3 +306,35 @@ h1#blog-title  {
 		color: $state-danger-text;
 	}
 }
+
+/* media / medium */
+
+// Medium ID displayed at the right-bottom corner of thumbnail image indexes
+.media {
+	.medium-thumb {
+		display: inline-block;
+		position: relative;
+		.medium-id {
+			position: absolute;
+			bottom: 2px;
+			right: 10px;
+			font-size: 1.5em;
+			font-weight: bold;
+			color: #1BE8FF;
+			text-shadow: 2px 2px 1px #333, -2px 2px 1px #333, 2px -2px 1px #333, -2px -2px 1px #333;
+		}
+	}
+}
+
+// Medium ID displayed at the bottom of Dropzone Preview image
+.dz-preview {
+	.medium-id {
+		position: absolute;
+		bottom: -20px;
+		left: 35px;
+		color: gray;
+		font-weight: bold;
+		margin-bottom: 5px;
+	}
+}
+

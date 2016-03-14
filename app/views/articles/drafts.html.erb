@@ -6,19 +6,19 @@
   <% @articles.each do |article| %>
     <div class="article">
       <div class="row">
-        <div class="col-md-9"> 
+        <div class="col-md-8"> 
           <h1 class="title"> <%= link_to article.title, article.url %> </h1>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-4">
             <%= link_to "Edit", edit_article_path(article.id), title: "Edit", class: "btn btn-primary" %>
             <%= link_to "Delete", article_path(article.id), method: :delete, data: { confirm: 'Are you sure?' }, title: "Delete", class: "btn btn-danger" %>
         </div>
       </div>
       <div class="row">
-        <div class="col-md-3"> <span class="posted">Updated: <%= article.updated_at %> </span> </div>
-        <div class="col-md-3"> <span class="posted">Created: <%= article.created_at %> </span> </div>
-        <div class="col-md-3"> <span class="posted">Author: <%= article.user.name %> </span> </div>
-        <div class="col-md-3"> <%= render 'articles/tag_list', tag_list: article.tag_list %> </div>
+        <div class="col-md-3"> <span class="posted"><label><span class='glyphicon glyphicon-time' title='Updated'></span></label> <%= article.updated_at %> </span> </div>
+        <div class="col-md-2"> <%= number_with_delimiter(article.content.size) %> chars </div>
+        <div class="col-md-3"> <span class="posted"><label><span class='glyphicon glyphicon-user' title='Author'></span></label> <%= article.user.name %> </span> </div>
+        <div class="col-md-4"> <%= render 'articles/tag_list', tag_list: article.tag_list %> </div>
       </div>
     </div>
   <% end %>

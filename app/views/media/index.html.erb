@@ -3,8 +3,10 @@
 <%= will_paginate %>
 <div class="media">
   <% @media.each do |medium| %>
-    <%= link_to image_tag((medium.image.url:thumb), class: "img-rounded"), medium_path(medium.id) %> 
-    <span class="mediumid">(id:<%= medium.id %>)</span>
+    <span class="medium-thumb"> 
+      <%= link_to image_tag((medium.image.url:thumb), class: "img-rounded"), medium_path(medium.id) %> 
+      <span class="medium-id">(id:<%= medium.id %>)</span>
+    </span>
   <% end %>
 </div>
 
