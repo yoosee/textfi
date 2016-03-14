@@ -149,7 +149,7 @@ class ArticlesController < ApplicationController
   def make_summary_image html, base_url
     doc = Nokogiri::HTML.parse html
     begin 
-      summary_image = doc.css('img').first.attribute('src')
+      summary_image = doc.css('img').first.attribute('src').to_s
     rescue
       summary_image = nil
     end
