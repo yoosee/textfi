@@ -146,6 +146,15 @@ class ArticlesController < ApplicationController
     request_blog ? request_blog.id : 1  # return default ID as fallback. revisit/fix later..
   end
 
+  def get_simmilar_tagged article
+    # try all tags match first, then any of if not hit.
+    tagged_articles = Article.tagged_with(article.tag_list, :match_all => true).order("created_at DESC").limit(3)
+    if tagged_articles.empty?  
+      tagged_articles = Article.tagged_with(article.tag_list, :any => true).order("created_at DESC").limit(3)
+    end
+    tagged_articles
+  end
+
   def make_summary_image html, base_url
     doc = Nokogiri::HTML.parse html
     begin 

@@ -27,6 +27,7 @@ class TextfiMarkdown < Redcarpet::Render::HTML
   end
 
   def block_code code, language
+    language = :text unless language
     Albino.colorize(code, language)
   end
 

@@ -189,6 +189,16 @@ h1#blog-title  {
 		h2,h3,h4,h5,h6 {
 			clear: both;
 		}
+		table {
+			margin: 0.5em 0;
+		}
+		th {
+			background-color: #81d2f3;
+		}
+		td, th {
+			padding: 0.2em 0.8em;
+			border: solid gray 1px;
+		}
 	}
 	.edit-link {
 		color: orange;
