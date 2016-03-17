@@ -105,6 +105,7 @@ class ArticlesController < ApplicationController
     @article.content = markdown @article.content
     @article.summary_image = make_summary_image @article.content, @blog.baseurl
     @article.summary_content = make_summary_content @article.content
+    @article.similar_tagged =  get_simmilar_tagged @article
     render 'show'
 #    render layout: 'application_articles_individual', action: 'show'
   end
@@ -141,16 +142,19 @@ class ArticlesController < ApplicationController
   def get_blog_id
     # requrl = request.original_url
     request_blog = Blog.where("baseurl like ?", "%#{request.host}%").first # revisit/fix later if request.host is appropriate identifier for Blog.
-    
-#    request_blog = Blog.find_by(:id => 1) ##### temporary for testing
     request_blog ? request_blog.id : 1  # return default ID as fallback. revisit/fix later..
   end
 
   def get_simmilar_tagged article
     # try all tags match first, then any of if not hit.
-    tagged_articles = Article.tagged_with(article.tag_list, :match_all => true).order("created_at DESC").limit(3)
-    if tagged_articles.empty?  
-      tagged_articles = Article.tagged_with(article.tag_list, :any => true).order("created_at DESC").limit(3)
+    tagged_articles = Array.new;
+    Article.tagged_with(article.tag_list, match_all: true).order("published_at DESC").published.limit(4).each do |a|
+      tagged_articles.push a if a.id != article.id # exclude self
+    end
+    if tagged_articles == [] # .empty? causes SQL error..
+      Article.tagged_with(article.tag_list, any: true).order("published_at DESC").published.limit(4).each do |a| 
+        tagged_articles.push a if a.id != article.id
+      end
     end
     tagged_articles
   end

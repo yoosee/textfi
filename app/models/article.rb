@@ -15,7 +15,7 @@ class Article < ActiveRecord::Base
 
   acts_as_taggable_on :tags
 
-  attr_accessor :summary_image, :summary_content
+  attr_accessor :summary_image, :summary_content, :similar_tagged
 
   def previous
     Article.unscoped.where(["id < ?", self.id]).published.order("published_at DESC").first

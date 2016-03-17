@@ -189,6 +189,10 @@ h1#blog-title  {
 		h2,h3,h4,h5,h6 {
 			clear: both;
 		}
+		blockquote {
+			font-size: 1em;
+			margin: 1em;
+		}
 		table {
 			margin: 0.5em 0;
 		}
@@ -216,6 +220,14 @@ h1#blog-title  {
 		}
 	}
 }
+
+.articles-similar-tagged {
+	margin: 1em;
+	padding: 1em;
+	border: solid gray 1px;
+	border-radius: 1em;
+}
+
 
 .drafts {
 	h1.title {
