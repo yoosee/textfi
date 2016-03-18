@@ -55,11 +55,11 @@ if you want to restart or stop, please replace 'start' with 'restart' or 'stop'.
 
 Setup Nginx or other HTTPD and connect it to Unicorn.
 
-After the installation, access to **http(s)://<your-base-url>/setup** for registering first User and Blog, then login.
+After the installation, access to **http(s)://\<your-base-url\>/setup** for registering first User and Blog, then login.
 
 ## Basic Usage of writing Articles.
 
-After logged in, click 'New Article' in 'Article' dropdown to start writing an article. It will be visible from the internet when its status set to 'publish'. Until then it'll be appeared in 'Drafts'.
+After logged in, click 'New Article' in 'Admin' dropdown to start writing an article. It will be visible from the internet when its status set to 'published'. Until then it'll be appeared in 'Drafts'.
 
 ### Markdown
 
@@ -67,7 +67,7 @@ Article should be written in Markdown format. It supports PHP extention format o
 
 ### Image upload and use in markdown
 
-You can Drag & Drop image to the browser area for uploading images. When upload completed, you can see (id:N) on the image which can be used in markdown like '\!\[Image Alt\]\(id:N\)'. You can review uploaded images from 'Media' link in dropdown menu.
+You can Drag & Drop image to the browser area for uploading images. When upload completed, you can see (id:N) on the image which can be used in markdown like **\!\[Image Alt\]\(id:N\)**. You can review uploaded images from 'Media' link in dropdown menu.
 
 ## Package dependencies
 
@@ -89,5 +89,9 @@ Following libraries are used for the application. Those are already included or 
 
 ## Known issues (or Todo list)
 
-There's no role & privilege control between User and Blog. It's all flat for now.
+* There's no role & privilege control between User and Blog. It's all flat for now.
+* Several design components haven't yet been configurable (e.g. Blog image, CSS, HTML template, favicon.ico, etc.)
+* Blog distenguished by hostname, not baseurl itself.
+* Image size from Medium is not configurable.
+* Some JavaScript and CSS have loading issue (taggable, etc.)
 
