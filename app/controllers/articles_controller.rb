@@ -45,13 +45,14 @@ class ArticlesController < ApplicationController
   def create
     @article = current_user.articles.build article_params
 
-    if @article.published? # || params[:status] == :published 
+    # add published_at time at the first published timing
+    if @article.published?
       @article.published_at = Time.now unless @article.published_at
     end
 
     if @article.save
       flash[:success] = "Article saved."
-      redirect_to @article
+      redirect_to @article.url
     else
       flash[:danger] = "Article could not be saved."
       @medium = Medium.new ### better way to keep @medium object in view??
@@ -71,13 +72,12 @@ class ArticlesController < ApplicationController
     @article = Article.find params[:id] 
 
     if @article.update_attributes article_params
-
+      # add published_at time at the first published timing
       if @article.published?
         @article.update_attribute(:published_at, Time.now) unless @article.published_at
       end
-
       flash[:success] = "Article Updated"
-      redirect_to @article
+      redirect_to @article.url
     else
       flash[:error] = "Article could not be updated"
       render 'edit'
