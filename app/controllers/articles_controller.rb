@@ -15,7 +15,7 @@ class ArticlesController < ApplicationController
     blog_id = get_blog_id()
     @blog = Blog.find blog_id
     # index shows all articles belongs to specific blog_id and status: published regardless users
-    articles = Article.where(blog_id: blog_id).published.paginate(page: params[:page], :per_page => 5)
+    articles = Article.where(blog_id: blog_id).unscoped.published.order("published_at DESC").paginate(page: params[:page], :per_page => 5)
     @articles = articles.each do |article|
       article.content = markdown article.content
     end
@@ -25,7 +25,7 @@ class ArticlesController < ApplicationController
     blog_id = get_blog_id()
     @blog = Blog.find blog_id
     # rss shows first 10 articles belongs to specific blog_id and status: published regardless users
-    articles = Article.where(blog_id: blog_id).published.first(10)
+    articles = Article.where(blog_id: blog_id).unscoped.published.order("published_at DESC").first(10)
     @articles = articles.each do |article|
       article.content = markdown article.content
     end

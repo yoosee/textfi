@@ -18,7 +18,6 @@
   <% @articles.each do |article| %>
     <item>
       <title><%= article.title %></title>
-      <dc:creator><%= article.user.name %></dc:creator>
       <link><%= article.url %></link>
       <description>
         <%= article.content %>
