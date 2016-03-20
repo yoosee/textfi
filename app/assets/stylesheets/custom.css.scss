@@ -336,6 +336,13 @@ h1#blog-title  {
 
 // Medium ID displayed at the right-bottom corner of thumbnail image indexes
 .media {
+	.medium-index {
+		text-align: center;
+		padding: 10px 0;
+		a {
+			margin: 5px;
+		}
+	}
 	.medium-thumb {
 		display: inline-block;
 		position: relative;

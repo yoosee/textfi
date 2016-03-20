@@ -16,7 +16,7 @@ class MediaController < ApplicationController
   end
 
   def index
-    @media = Medium.reorder("created_at DESC").paginate(page: params[:page], :per_page => 12)
+    @media = Medium.reorder("created_at DESC").paginate(page: params[:page], :per_page => 24)
   end
 
   def show
@@ -30,10 +30,13 @@ class MediaController < ApplicationController
       @medium.save
       @medium.destroy
     rescue
-      flash[:danger] = "unable to delete medium"
+      flash[:danger] = "unable to delete medium #{@medium.errors.full_messages.join(',')}"
+      render json: { message: @medium.errors.full_messages.join(',') }
     else
-      flash[:success] = "medium deleted"
+      flash[:success] = "Medium deleted"
+      render json: { message: "Medium deleted" }
     end
+    redirect_to :back
   end
 
 

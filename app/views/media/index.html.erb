@@ -1,13 +1,21 @@
 <% provide(:title, 'All Media') %>
 
 <%= will_paginate %>
-<div class="media">
-  <% @media.each do |medium| %>
-    <span class="medium-thumb"> 
-      <%= link_to image_tag((medium.image.url:thumb), class: "img-rounded"), medium_path(medium.id) %> 
-      <span class="medium-id">(id:<%= medium.id %>)</span>
-    </span>
-  <% end %>
+<div class="media container">
+  <div class="row">
+    <% col = 0 %>
+    <% @media.each do |medium| %>
+      <% col += 1 %>
+      <div class="col-md-2 medium-index">
+        <span class="medium-thumb"> 
+          <%= link_to image_tag((medium.image.url:thumb), class: "img-rounded"), medium_path(medium.id) %> 
+          <span class="medium-id">(id:<%= medium.id %>)</span>
+        </span>
+        <span><%= link_to "Remove", medium_path(medium.id), method: :delete, data: { confirm: 'Are you sure to delete the Medium?' }, title: "Delete", class: "btn btn-danger btn-sm" %></span>
+      </div>
+      <% if col % 6 == 0 %></div><div class="row"><% end %>
+    <% end %>
+    </div>
 </div>
 
 <%= will_paginate %>
