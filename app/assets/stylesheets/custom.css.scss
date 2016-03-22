@@ -350,10 +350,13 @@ h1#blog-title  {
 			position: absolute;
 			bottom: 2px;
 			right: 10px;
-			font-size: 1.5em;
+			font-size: 1.2em;
 			font-weight: bold;
 			color: #1BE8FF;
 			text-shadow: 2px 2px 1px #333, -2px 2px 1px #333, 2px -2px 1px #333, -2px -2px 1px #333;
+			a {
+				color: #1BE8FF;
+			}
 		}
 	}
 }

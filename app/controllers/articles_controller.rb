@@ -56,6 +56,7 @@ class ArticlesController < ApplicationController
     else
       flash[:danger] = "Article could not be saved."
       @medium = Medium.new ### better way to keep @medium object in view??
+      @blogs = Blog.all
       render 'new'
     end
   end

@@ -9,7 +9,7 @@
       <div class="col-md-2 medium-index">
         <span class="medium-thumb"> 
           <%= link_to image_tag((medium.image.url:thumb), class: "img-rounded"), medium_path(medium.id) %> 
-          <span class="medium-id">(id:<%= medium.id %>)</span>
+          <span class="medium-id"><%= link_to "(id:#{medium.id})", medium_path(medium.id) %></span>
         </span>
         <span><%= link_to "Remove", medium_path(medium.id), method: :delete, data: { confirm: 'Are you sure to delete the Medium?' }, title: "Delete", class: "btn btn-danger btn-sm" %></span>
       </div>
