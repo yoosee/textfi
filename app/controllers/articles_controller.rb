@@ -146,20 +146,22 @@ class ArticlesController < ApplicationController
     request_blog ? request_blog.id : 1  # return default ID as fallback. revisit/fix later..
   end
 
-  def get_simmilar_tagged article
-    # try all tags match first, then any of if not hit.
+  def get_simmilar_tagged article, num = 4
+    # try match_all tags first, then any of if not hit.
     tagged_articles = Array.new;
-    Article.tagged_with(article.tag_list, match_all: true).order("published_at DESC").published.limit(4).each do |a|
+    Article.tagged_with(article.tag_list, match_all: true).order("published_at DESC").published.limit(num+1).each do |a|
       tagged_articles.push a if a.id != article.id # exclude self
     end
-    if tagged_articles == [] # .empty? causes SQL error..
-      Article.tagged_with(article.tag_list, any: true).order("published_at DESC").published.limit(4).each do |a| 
+    if tagged_articles.size < num 
+      # .limit is actually .limit(num+1 - tagged_articles.size + tagged_articles.size since :any includes :match_all
+      Article.tagged_with(article.tag_list, any: true).order("published_at DESC").published.limit(num +1).each do |a| 
         tagged_articles.push a if a.id != article.id
       end
     end
-    tagged_articles
+    tagged_articles.uniq
   end
 
+  # capture first img in HTML and set it to summary image for Social share.
   def make_summary_image html, base_url
     doc = Nokogiri::HTML.parse html
     begin 
