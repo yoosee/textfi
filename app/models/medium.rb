@@ -2,7 +2,7 @@ class Medium < ActiveRecord::Base
 #  belongs_to :article
 
   has_attached_file :image,
-    styles: { medium: "800x480>", thumb: "120x120>" },
+    styles: { medium: "920x480>", thumb: "120x120>" },
     convert_options: { 
       all: "-strip"
     },
