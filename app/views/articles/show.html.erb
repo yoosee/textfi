@@ -56,6 +56,7 @@
 
 <% else %>
   <%= provide(:title, "No article - #{@blog.title}") %>
+  <h1>404 Not Found</h1>
   <div> No article in this url. <%= link_to "back to home", root_path %>.</div>
 <% end %>
 
