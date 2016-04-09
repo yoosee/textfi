@@ -13,11 +13,12 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery-ui
+//= require jquery.turbolinks
 //= require bootstrap
 //= require dropzone.min
 //= require bootstrap-tagsinput.min
-//= require jquery.turbolinks
 //= require media
+//= require articles
 //= require turbolinks
 //= require_tree .
 //

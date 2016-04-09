@@ -28,7 +28,7 @@ class BlogsController < ApplicationController
     @blog = Blog.find params[:id]
     if @blog.update_attributes blog_params
       flash[:success] = "Blog updated"
-      redirect_to 'index'
+      render 'edit'
     else
       flash[:danger] = "Blog update failed"
       render 'edit'
