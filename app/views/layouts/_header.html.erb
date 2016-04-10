@@ -16,11 +16,18 @@
 
       <ul class="nav navbar-nav navbar-right">
         <li><%= link_to "Home", root_path %></li>
-        <li><a href="#" data-toggle="popover" data-placement="bottom" data-trigger="focus" title="About" data-content="<%= @blog.summary %>">About</a></li>
+        <% if @blog %> 
+          <li><a href="#" data-toggle="popover" data-placement="bottom" data-trigger="focus" data-container="body" title="About <%= @blog.title %>" data-content='<%== @blog.summary %>'>About</a></li> 
+        <% end %>
         <script>
         $(document).ready(function(){
-            $('[data-toggle="popover"]').popover();   
-            });
+          $('[data-toggle="popover"]').popover({
+            html : true,
+            content: function() {
+              return $('#popoverAbout').html();
+            }
+          });
+        });
         </script>
         <% if signed_in? %>
           <li id="fat-menu" class="dropdown">

@@ -16,9 +16,14 @@
 
     <br/>
     <label>Upload images</label>
-    <button type="button" class="btn btn-default" data-container="body" data-toggle="popover" data-placement="top" title="markdown usage" data-content="you can use uploaded images calling by id like ![alt-text](id:10). it'll be replaced by actual image URL.">
+    <button type="button" class="btn btn-default" data-container="body" data-toggle="popover" data-placement="top" title="image usage in markdown" data-content="you can use uploaded images by id. e.g. ![alt-text](id:10). it'll be replaced by actual image URL.">
       <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
     </button> 
+    <script>
+$(document).ready(function(){
+      $('[data-toggle="popover"]').popover(); 
+});
+    </script>
     <%= form_for @medium, :html => { multipart: true, class: "dropzone" } do |f| %>
       <div class="fallback">
         <%= f.file_field :image %>

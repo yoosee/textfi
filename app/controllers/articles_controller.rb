@@ -1,6 +1,6 @@
 class ArticlesController < ApplicationController
-#  before_action :signed_in_user, only: [:new, :create, :edit, :update, :drafts, :destroy]
   before_action :signed_in_user, except: [:index, :rss, :show, :showbyurl]
+  before_action :set_blog
 
   def new
     @article = Article.new
@@ -12,20 +12,16 @@ class ArticlesController < ApplicationController
   end
 
   def index
-    blog_id = get_blog_id()
-    @blog = Blog.find blog_id
     # index shows all articles belongs to specific blog_id and status: published regardless users
-    articles = Article.where(blog_id: blog_id).unscoped.published.order("published_at DESC").paginate(page: params[:page], :per_page => 5)
+    articles = Article.where(blog_id: @blog.id).unscoped.published.order("published_at DESC").paginate(page: params[:page], :per_page => 5)
     @articles = articles.each do |article|
       article.content = markdown article.content
     end
   end
   
   def rss
-    blog_id = get_blog_id()
-    @blog = Blog.find blog_id
     # rss shows first 10 articles belongs to specific blog_id and status: published regardless users
-    articles = Article.where(blog_id: blog_id).unscoped.published.order("published_at DESC").first(10)
+    articles = Article.where(blog_id: @blog.id).unscoped.published.order("published_at DESC").first(10)
     @articles = articles.each do |article|
       article.content = markdown article.content
     end
@@ -34,7 +30,6 @@ class ArticlesController < ApplicationController
   end
 
   def drafts
-    @blog = Blog.find get_blog_id()
     # Drafts shows draft articles belongs to current_user
     articles = current_user.articles.unscoped.draft.order("updated_at DESC").paginate(page: params[:page], :per_page => 10)
     @articles = articles.each do |article|
@@ -99,8 +94,6 @@ class ArticlesController < ApplicationController
   end
 
   def showbyurl
-    blog_id = get_blog_id()
-    @blog = Blog.find blog_id
     @article = Article.find_by_alt_url params[:alt_url]
     @article = Article.find params[:alt_url] unless @article
     @article.content = markdown @article.content
@@ -108,19 +101,16 @@ class ArticlesController < ApplicationController
     @article.summary_content = make_summary_content @article.content
     @article.similar_tagged =  get_simmilar_tagged @article
     render 'show'
-#    render layout: 'application_articles_individual', action: 'show'
   end
 
   def show
-    @blog = Blog.find get_blog_id()
     @article = Article.find params[:id]
     @article.content = markdown @article.content
     make_summary @article.content
   end
 
   def tagged
-    blog_id = get_blog_id()
-    @blog = Blog.find blog_id
+    ### Toto: it might be need limit by blog.id
     @articles = Article.tagged_with(params[:tags]).published.paginate(page: params[:page], :per_page => 10)
     if @articles.empty?
       flash[:warning] = "Articles Tagged \"#{params[:tags]}\" Not found."
@@ -138,6 +128,12 @@ class ArticlesController < ApplicationController
 
   def signed_in_user
     redirect_to signin_url, notice: "please sign in." unless signed_in?
+  end
+
+  def set_blog
+    blog_id = get_blog_id 
+    @blog = Blog.find blog_id
+    @blog.summary = markdown @blog.summary.gsub(/'/,"\'")
   end
   
   def get_blog_id
@@ -204,6 +200,5 @@ class ArticlesController < ApplicationController
     markdown = Redcarpet::Markdown.new(TextfiMarkdown.new(render_options), extensions)
     markdown.render(text).html_safe
   end
-
 end
 

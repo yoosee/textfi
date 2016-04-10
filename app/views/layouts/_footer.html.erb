@@ -4,7 +4,9 @@
   </small>
   <nav>
     <ul>
-      <li><%= link_to "About",   '#' %></li>
+       <% if @blog %>
+       <li><a href="#" data-toggle="popover" data-placement="top" data-trigger="focus" data-container="body" title="About <%= @blog.title %>" data-content='<%== @blog.summary %>'>About</a></li>
+       <% end %>
       <li><%= link_to "Contact", '#' %></li>
     </ul>
   </nav>
