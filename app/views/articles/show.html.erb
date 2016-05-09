@@ -21,9 +21,12 @@
 <% if @article.published? || signed_in? %>
   <%= provide(:title, "#{@article.title} - #{@blog.title}") %>
   <%= render 'article', article: @article %>
-  <%= render 'layouts/googleadsense' %>
-  <!-- Go to www.addthis.com/dashboard to customize your tools -->
-  <div class="addthis_sharing_toolbox"></div>
+
+  <% if @article.published? %> <%# don't show adsense and addthis unless published %>
+    <%= render 'layouts/googleadsense' %>
+    <!-- Go to www.addthis.com/dashboard to customize your tools -->
+    <div class="addthis_sharing_toolbox"></div>
+  <% end %>
 
   <% if !@article.similar_tagged.empty? %>
   <!-- Similar articles based on the same Tag -->
@@ -51,7 +54,9 @@
 
   <div class="article-comment">
     <!-- FB Comment -->
-    <div class="fb-comments" data-href="<%= @article.url %>" data-width="600" data-numposts="3"></div>
+    <% if @article.published? %>
+      <div class="fb-comments" data-href="<%= @article.url %>" data-width="600" data-numposts="3"></div>
+    <% end %>
   </div>
 
 <% else %>
