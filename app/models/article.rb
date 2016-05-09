@@ -18,11 +18,19 @@ class Article < ActiveRecord::Base
   attr_accessor :summary_image, :summary_content, :similar_tagged
 
   def previous
-    Article.unscoped.where(["id < ?", self.id]).published.order("published_at DESC").first
+    if self.published?
+      Article.unscoped.where(["published_at < ?", self.published_at]).order("published_at DESC").first
+    else
+      Article.unscoped.where(["id < ?", self.id]).order("id DESC").first
+    end
   end
 
   def next
-    Article.unscoped.where(["id > ?", self.id]).published.order("published_at ASC").first
+    if self.published?
+      Article.unscoped.where(["published_at > ?", self.published_at]).order("published_at ASC").first
+    else
+      Article.unscoped.where(["id > ?", self.id]).order("id ASC").first
+    end
   end
 
   def url
