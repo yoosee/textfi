@@ -25,4 +25,7 @@
 Gemfile.lock 
 
 /.byebug_history
-/*/*.swp
+*.swp
+.*.swp
+*~
+.*~

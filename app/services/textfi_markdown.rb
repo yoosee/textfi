@@ -1,6 +1,8 @@
 class TextfiMarkdown < Redcarpet::Render::HTML
   include Redcarpet::Render::SmartyPants
 
+  require 'json'
+
 #  def preprocess text
 #  end
 
@@ -29,6 +31,19 @@ class TextfiMarkdown < Redcarpet::Render::HTML
   def block_code code, language
     language = :text unless language
     Albino.colorize(code, language)
+  end
+
+  def block_quote quote
+
+    # assuming input "> https://twitter.com/...." oneline in quote
+    if quote.gsub(/<[^>]+>/,'') =~ /^https?:\/\/twitter\.com[\S]+/
+      oembed_url = "https://publish.twitter.com/oembed?url="
+      req = oembed_url + URI.encode(quote.gsub(/<[^>]+>/,''))
+      res = JSON.parse(open(req).read)
+      return res['html']
+    else
+      return "<blockquote>#{quote}</blockquote>"
+    end
   end
 
 #  def codespan code
