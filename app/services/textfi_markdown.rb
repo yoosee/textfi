@@ -37,10 +37,17 @@ class TextfiMarkdown < Redcarpet::Render::HTML
 
     # assuming input "> https://twitter.com/...." oneline in quote
     if quote.gsub(/<[^>]+>/,'') =~ /^https?:\/\/twitter\.com[\S]+/
-      oembed_url = "https://publish.twitter.com/oembed?url="
+      tw_width = 550
+      oembed_url = "https://publish.twitter.com/oembed?maxwidth=#{tw_width}&url="
       req = oembed_url + URI.encode(quote.gsub(/<[^>]+>/,''))
       res = JSON.parse(open(req).read)
       return res['html']
+
+    # assuming input "> https://www.youtube.com/watch/v=...." oneline in quote
+    elsif quote.gsub(/<[^>]+>/,'') =~ /^https?:\/\/(www\.)?youtube\.com\/watch\?v=[\S]+/
+      youtube_id = quote.match(/youtube\.com\/watch\?v=([^&"<>]+)/)[1]
+      youtube_embed = "<iframe id='ytplayer' type='text/html' width='640' height='360' src='https://www.youtube.com/embed/#{youtube_id}?autoplay=0' frameborder='0'></iframe>"
+      return youtube_embed
     else
       return "<blockquote>#{quote}</blockquote>"
     end
