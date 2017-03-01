@@ -99,7 +99,7 @@ class ArticlesController < ApplicationController
     @article.content = markdown @article.content
     @article.summary_image = make_summary_image @article.content, @blog.baseurl
     @article.summary_content = make_summary_content @article.content
-    @article.similar_tagged =  get_simmilar_tagged @article
+    @article.similar_tagged =  get_similar_tagged @article
     render 'show'
   end
 
@@ -142,7 +142,7 @@ class ArticlesController < ApplicationController
     request_blog ? request_blog.id : 1  # return default ID as fallback. revisit/fix later..
   end
 
-  def get_simmilar_tagged article, num = 4
+  def get_similar_tagged article, num = 4
     # try match_all tags first, then any of if not hit.
     tagged_articles = Array.new;
     Article.tagged_with(article.tag_list, match_all: true).order("published_at DESC").published.limit(num+1).each do |a|
