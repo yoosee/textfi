@@ -43,12 +43,12 @@
   <!-- Pager -->
   <ul class="pager">
     <% if @article.previous %> 
-      <li class="previous"><%= link_to ("&larr; Older").html_safe, @article.previous.url, title: @article.previous.title %></li>
+      <li class="previous"><%= link_to ("&larr; Older: #{@article.previous.title}").html_safe, @article.previous.url, title: @article.previous.title %></li>
     <% else %>
       <li class="previous disabled"><%= link_to ("&larr; Older").html_safe, '#' %></li>
     <% end %>
     <% if @article.next %> 
-      <li class="next"><%= link_to ("Newer &rarr;").html_safe, @article.next.url, title: @article.next.title %></li>
+      <li class="next"><%= link_to ("Newer: #{@article.next.title} &rarr;").html_safe, @article.next.url, title: @article.next.title %></li>
     <% else %>
       <li class="next disabled"><%= link_to ("Newer &rarr;").html_safe, '#' %></li>
     <% end %>
