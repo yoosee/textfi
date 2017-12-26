@@ -63,7 +63,7 @@ After logged in, click 'New Article' in 'Admin' dropdown to start writing an art
 
 ### Markdown
 
-Article should be written in Markdown format. It supports PHP extention format of fenced_code_blocks, tables, etc.
+Article should be written in Markdown format. It supports PHP extension format of fenced_code_blocks, tables, etc.
 
 ### Image upload and use in markdown
 
