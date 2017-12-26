@@ -39,7 +39,7 @@ class TextfiMarkdown < Redcarpet::Render::HTML
     if quote.gsub(/<[^>]+>/,'') =~ /^https?:\/\/twitter\.com[\S]+/
       tw_width = 550
       oembed_url = "https://publish.twitter.com/oembed?maxwidth=#{tw_width}&url="
-      req = oembed_url + URI.encode(quote.gsub(/<[^>]+>/,''))
+      req = oembed_url + URI.encode_www_form(quote.gsub(/<[^>]+>/,''))
       res = JSON.parse(open(req).read)
       return res['html']
 
