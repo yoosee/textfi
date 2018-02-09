@@ -33,7 +33,7 @@ gem 'will_paginate'
 gem 'bootstrap-will_paginate'
 
 # Image uploader
-gem 'paperclip', "~> 4.3"
+gem 'paperclip', "~> 5.2.1"
 
 # tag model and utility
 gem 'acts-as-taggable-on', '~> 3.4'
