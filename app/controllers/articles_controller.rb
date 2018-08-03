@@ -132,7 +132,13 @@ class ArticlesController < ApplicationController
 
   def set_blog
     blog_id = get_blog_id 
-    @blog = Blog.find blog_id
+    begin
+      @blog = Blog.find blog_id
+    rescue => e
+      flash[:error] = "Blog doesn't exist. Please setup your Blog."
+      redirect_to '/setup'
+      return
+    end
     @blog.summary = markdown @blog.summary.gsub(/'/,"\'")
   end
   
