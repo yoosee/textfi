@@ -32,11 +32,16 @@
 
   <% if !@article.similar_tagged.empty? %>
   <!-- Similar articles based on the same Tag -->
-  <div class="articles-similar-tagged">
-    <label>Similar Articles</label>
-    <ul> <% @article.similar_tagged.each do |article| %>
-      <li> <%= link_to article.title, article.url %> (<%= time_ago_in_words(article.published_at) %> ago) <%= render 'tag_list', tag_list: article.tag_list %></li>
-    <% end %> </ul>
+  <label>関連する記事</label>
+  <div class="articles-similar-tagged container">
+    <div class="row">
+    <% @article.similar_tagged.each_slice(2) do |articles| %>
+        <% articles.each do |article| %>
+          <%= render 'article_similar', article: article %>
+        <% end %>
+        <div class="w-100"></div>
+    <% end %>
+    </div>
   </div>
   <% end %>
 

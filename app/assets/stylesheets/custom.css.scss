@@ -1,6 +1,3 @@
-@import "bootstrap-sprockets";
-@import "bootstrap";
-
 /* media default width */
 // using narrower width as it's using single column layout
 
@@ -224,10 +221,14 @@ h1#blog-title  {
 }
 
 .articles-similar-tagged {
-	margin: 1em;
-	padding: 1em;
-	border: solid gray 1px;
-	border-radius: 1em;
+}
+
+.article-similar {
+	padding: 0.5em;
+	img {
+		width: 48px;
+		height: 48px;
+	}
 }
 
 
@@ -331,10 +332,8 @@ h1#blog-title  {
 }
 
 .field_with_errors { 
-	@extend .has-error;
-	.form-control {
-		color: $state-danger-text;
-	}
+	@extend .form-group;
+	@extend .has-error !optional;
 }
 
 /* media / medium */
@@ -375,6 +374,14 @@ h1#blog-title  {
 		color: gray;
 		font-weight: bold;
 		margin-bottom: 5px;
+	}
+}
+
+// Article styles
+
+.article { 
+	.title { 
+		text-align: left;
 	}
 }
 

@@ -1,0 +1,10 @@
+<div class="article-similar col-sm-6">
+  <%= image_tag(article.summary_image) %>
+  <strong class="title"> <%= link_to article.title, article.url %> </strong>
+  <div>
+    <%= article.summary_content %>
+  <br />
+    (<%= time_ago_in_words(article.published_at) %> ago) 
+    <%= render 'tag_list', tag_list: article.tag_list %> 
+  </div>
+</div>

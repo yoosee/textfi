@@ -10,7 +10,8 @@ gem 'coffee-rails', '~> 4.1.0'
 gem 'unicorn'
 
 gem 'bootstrap-sass' #, '3.2.0.0'
-gem 'sprockets'
+#gem 'sprockets'
+#gem 'bootstrap'
 
 gem 'bcrypt'
 #gem 'faker'
