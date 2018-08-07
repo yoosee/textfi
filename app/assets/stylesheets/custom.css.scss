@@ -226,8 +226,17 @@ h1#blog-title  {
 .article-similar {
 	padding: 0.5em;
 	img {
-		width: 48px;
-		height: 48px;
+		object-fit: cover;
+		object-position: center;
+		width: 100px;
+		height: 100px;
+		vertical-align: top;
+		border-radius: 10px;
+	}
+	div {
+		margin-left: 0.5em;
+		display:inline-block;
+		vertical-align:middle;
 	}
 }
 

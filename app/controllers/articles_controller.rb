@@ -152,12 +152,22 @@ class ArticlesController < ApplicationController
     # try match_all tags first, then any of if not hit.
     tagged_articles = Array.new;
     Article.tagged_with(article.tag_list, match_all: true).order("published_at DESC").published.limit(num+1).each do |a|
-      tagged_articles.push a if a.id != article.id # exclude self
+      if a.id != article.id # exclude self
+        content = markdown a.content
+        a.summary_image = make_summary_image content, @blog.baseurl
+        a.summary_content = make_summary_content content
+        tagged_articles.push a 
+      end
     end
     if tagged_articles.size < num 
       # .limit is actually .limit(num+1 - tagged_articles.size + tagged_articles.size since :any includes :match_all
       Article.tagged_with(article.tag_list, any: true).order("published_at DESC").published.limit(num +1).each do |a| 
-        tagged_articles.push a if a.id != article.id
+        if a.id != article.id # exclude self
+          content = markdown a.content
+          a.summary_image = make_summary_image content, @blog.baseurl
+          a.summary_content = make_summary_content content
+          tagged_articles.push a 
+        end
       end
     end
     tagged_articles.uniq
