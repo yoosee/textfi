@@ -187,7 +187,7 @@ class ArticlesController < ApplicationController
     if summary_image && !summary_image.empty? && /^http/ !~ summary_image
       summary_image = "#{base_url}/#{summary_image}"
     else
-      summary_image = "#{base_url}/public/image/medium/icon-blog.png"
+      summary_image = "#{base_url}/image/medium/icon-blog.png"
     end
     summary_image
   end

@@ -1,5 +1,5 @@
 <div class="article-similar col-sm-6">
-  <%= image_tag(article.summary_image) %>
+  <%= link_to image_tag(article.summary_image), article.url %>
   <div>
     <strong class="title"> <%= link_to article.title, article.url %> </strong> <br/>
     <%= article.summary_content %>
