@@ -67,8 +67,7 @@ group :development do
 end
 
 group :production do
-  gem 'pg', '~> 0.20'
-#  gem 'pg', '~> 1.0'
+  gem 'pg'
   gem 'therubyracer', platforms: :ruby
 #  gem 'rails_12factor'
 end
