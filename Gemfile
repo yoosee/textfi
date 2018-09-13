@@ -1,9 +1,9 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.2.10'
+gem 'rails', '5.2.1'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
-gem 'coffee-rails', '~> 4.1.0'
+gem 'coffee-rails', '~> 4.2.2'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
@@ -37,7 +37,7 @@ gem 'bootstrap-will_paginate'
 gem 'paperclip', "~> 5.2.1"
 
 # tag model and utility
-gem 'acts-as-taggable-on', '~> 3.4'
+gem 'acts-as-taggable-on', '~> 6.0'
 
 # Use Unicorn as the app server
 # gem 'unicorn'
@@ -62,7 +62,7 @@ group :development do
   gem 'spring'
 
   gem 'better_errors'
-  gem 'quiet_assets'
+#  gem 'quiet_assets'
   gem 'rails_layout'
 end
 
