@@ -7,6 +7,8 @@ gem 'coffee-rails', '~> 4.2.2'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
+gem 'bootsnap', '>= 1.1.0', require: false
+
 gem 'unicorn'
 
 gem 'bootstrap-sass' #, '3.2.0.0'
@@ -58,8 +60,9 @@ end
 
 group :development do
 #  gem 'rspec-rails'
-  gem 'web-console', '~> 2.0'
+  gem 'web-console'
   gem 'spring'
+  gem 'listen'
 
   gem 'better_errors'
 #  gem 'quiet_assets'
