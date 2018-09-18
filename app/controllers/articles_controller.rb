@@ -34,9 +34,6 @@ class ArticlesController < ApplicationController
   def drafts
     # Drafts shows draft articles belongs to current_user. it isn't converted to html
     @articles = current_user.articles.unscoped.draft.order("updated_at DESC").paginate(page: params[:page], :per_page => 10)
-#    @articles = articles.each do |article|
-#      article.content = markdown article.content
-#    end
   end
 
   def create
