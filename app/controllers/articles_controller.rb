@@ -133,7 +133,11 @@ class ArticlesController < ApplicationController
   def set_blog
     blog_id = get_blog_id 
     @blog = Blog.find blog_id
-    @blog.summary = markdown @blog.summary.gsub(/'/,"\'")
+    if @blog.summary != nil 
+      @blog.summary = markdown @blog.summary.gsub(/'/,"\'") 
+    else
+      @blog.summary = ''
+    end
   end
   
   def get_blog_id
