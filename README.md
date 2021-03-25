@@ -2,7 +2,7 @@
 
 Textfi is simple blog tool written with Rails. current version works with Rails 4.2.
 
-website http://textfi.com or https://github.com/yoosee/textfi
+website https://github.com/yoosee/textfi
 
 ## Installation
 

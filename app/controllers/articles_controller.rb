@@ -14,6 +14,7 @@ class ArticlesController < ApplicationController
   def index
     # index shows all articles belongs to specific blog_id and status: published regardless users
     articles = Article.where(blog_id: @blog.id).unscoped.published.order("published_at DESC").paginate(page: params[:page], :per_page => 5)
+    articles = Article.new if articles == nil
     @articles = articles.each do |article|
       article.content = markdown article.content
     end
