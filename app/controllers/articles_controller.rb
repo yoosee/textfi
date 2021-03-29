@@ -13,9 +13,8 @@ class ArticlesController < ApplicationController
 
   def index
     # index shows all articles belongs to specific blog_id and status: published regardless users
-    articles = Article.where(blog_id: @blog.id).unscoped.published.order("published_at DESC").paginate(page: params[:page], :per_page => 5)
-    articles = Article.new if articles == nil
-    @articles = articles.each do |article|
+    @articles = Article.where(blog_id: @blog.id).unscoped.published.order("published_at DESC").paginate(page: params[:page], :per_page => 5)
+    @articles.each do |article|
       article.content = markdown article.content
     end
   end
@@ -32,8 +31,8 @@ class ArticlesController < ApplicationController
 
   def drafts
     # Drafts shows draft articles belongs to current_user
-    articles = current_user.articles.unscoped.draft.order("updated_at DESC").paginate(page: params[:page], :per_page => 10)
-    @articles = articles.each do |article|
+    @articles = current_user.articles.unscoped.draft.order("updated_at DESC").paginate(page: params[:page], :per_page => 10)
+    @articles = @articles.each do |article|
       article.content = markdown article.content
     end
   end
