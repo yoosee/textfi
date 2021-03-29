@@ -5,7 +5,7 @@
   <small>a blog on first go without spending ages practicing.</small></h1>
 </div>
 
-<%= will_paginate %>
+<%= will_paginate @articles_page %>
 
 <div class="articles">
   <% @articles.each do |article| %>
@@ -14,4 +14,4 @@
   <% end %>
 </div>
 
-<%= will_paginate %>
+<%= will_paginate @articles_page %>

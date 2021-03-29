@@ -1,4 +1,4 @@
-class Article < ActiveRecord::Base
+class Article < ApplicationRecord
   belongs_to :user
 #  has_many :media, :dependent => :destroy
   enum status: { draft: 0, published: 1 }

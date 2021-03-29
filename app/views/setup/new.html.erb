@@ -8,7 +8,7 @@
       <h2>User Setup</h2>
       <%= form_tag({controller: "setup", action: "create"}) do %>
         <%= render 'shared/error_messages' %>
-        <%= label :name, "Name" %> <%= text_field :user, :name %>
+        <%= label :name, "Name" %> <%= text_field :user, :name, class: 'form-control'  %>
         <%= label :email, "Email" %> <%= text_field :user, :email, class: 'form-control' %>
         <%= label :password, "Password" %> <%= password_field :user, :password, class: 'form-control' %>
         <%= label :password_confirmation, "Password Confirmation" %> <%= password_field :user, :password_confirmation, class: 'form-control' %>

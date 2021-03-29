@@ -10,7 +10,7 @@ class SetupController < ApplicationController
       @user.save!
       @blog.save!
       flash[:success] = "User successfully created."
-      redirect_to 'new'
+      redirect_to '/'
     end
   rescue
     @blog.valid?

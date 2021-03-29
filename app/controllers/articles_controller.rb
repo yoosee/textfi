@@ -132,12 +132,14 @@ class ArticlesController < ApplicationController
 
   def set_blog
     blog_id = get_blog_id 
-    @blog = Blog.find blog_id
-    if @blog.summary != nil 
-      @blog.summary = markdown @blog.summary.gsub(/'/,"\'") 
-    else
-      @blog.summary = ''
+    begin
+      @blog = Blog.find blog_id
+    rescue => e
+      flash[:error] = "Blog doesn't exist. Please setup your Blog."
+      redirect_to '/setup'
+      return
     end
+    @blog.summary = markdown @blog.summary.gsub(/'/,"\'")
   end
   
   def get_blog_id
@@ -150,15 +152,27 @@ class ArticlesController < ApplicationController
     # try match_all tags first, then any of if not hit.
     tagged_articles = Array.new;
     Article.tagged_with(article.tag_list, match_all: true).order("published_at DESC").published.limit(num+1).each do |a|
-      tagged_articles.push a if a.id != article.id # exclude self
+      if a.id != article.id # exclude self
+        tagged_articles.push build_summary_similar_tagged a 
+      end
     end
     if tagged_articles.size < num 
       # .limit is actually .limit(num+1 - tagged_articles.size + tagged_articles.size since :any includes :match_all
       Article.tagged_with(article.tag_list, any: true).order("published_at DESC").published.limit(num +1).each do |a| 
-        tagged_articles.push a if a.id != article.id
+        if a.id != article.id # exclude self
+          tagged_articles.push build_summary_similar_tagged a 
+        end
       end
     end
     tagged_articles.uniq
+  end
+
+  def build_summary_similar_tagged article
+    content = markdown article.content
+    article.title = article.title.truncate(22, :omission => "...")
+    article.summary_image = make_summary_image content, @blog.baseurl
+    article.summary_content = (make_summary_content content).truncate(80)
+    return article
   end
 
   # capture first img in HTML and set it to summary image for Social share.
@@ -172,6 +186,8 @@ class ArticlesController < ApplicationController
     summary_image = '' unless summary_image
     if summary_image && !summary_image.empty? && /^http/ !~ summary_image
       summary_image = "#{base_url}/#{summary_image}"
+    else
+      summary_image = "#{base_url}/image/medium/icon-blog.png"
     end
     summary_image
   end
