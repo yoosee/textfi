@@ -17,6 +17,7 @@
 /tmp
 
 /public/system/media/*
+/public/assets/*
 
 # original dir for bundle install
 /vendor/bundle
