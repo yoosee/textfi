@@ -1,6 +1,6 @@
 # Textfi
 
-Textfi is simple blog tool written with Rails. current version works with Rails 4.2.
+Textfi is simple blog tool written with Rails. current version works with Rails 5.2.
 
 website https://github.com/yoosee/textfi
 
