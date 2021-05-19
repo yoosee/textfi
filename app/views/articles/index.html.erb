@@ -1,8 +1,9 @@
 <% provide(:title, @blog.title ) %>
 
 <div class="page-header">
-  <h1 id="blog-title"><%= link_to image_tag("/system/W3er-title.png", alt: @blog.title, class: "img-responsive"), root_path %><br>
-  <small>a blog on first go without spending ages practicing.</small></h1>
+  <h1 id="blog-title">
+    <%= link_to image_tag("/system/W3er-title.png", alt: @blog.title, class: "img-responsive"), root_path %><br>
+  </h1>
 </div>
 
 <%= will_paginate @articles_page %>
