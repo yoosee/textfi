@@ -52,7 +52,7 @@ gem 'acts-as-taggable-on', '~> 5.0.0'
 
 group :development, :test do
   gem 'byebug'
-  gem 'sqlite3', '1.3.13'
+  gem 'sqlite3', '~> 1.4'
 end
 
 group :test do
