@@ -3,23 +3,18 @@ source 'https://rubygems.org'
 #gem 'bigdecimal', '1.3.5'
 
 gem 'rails', '~> 6.0'
-gem 'sass-rails' #, '~> 5.0'
-gem 'uglifier' #, '>= 1.3.0'
-gem 'coffee-rails' #, '~> 4.1.0'
+gem 'sass-rails'
+gem 'uglifier' 
+gem 'coffee-rails' 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
-#gem 'bootsnap', '>= 1.1.0', require: false
 gem 'bootsnap'
+gem 'bootstrap-sass'
 
 gem 'unicorn'
 
-gem 'bootstrap-sass' #, '3.2.0.0'
-#gem 'sprockets'
-#gem 'bootstrap'
-
 gem 'bcrypt'
-#gem 'faker'
 
 gem 'jquery-rails' 
 gem 'jquery-ui-rails'
